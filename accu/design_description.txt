@@ -1,0 +1,15 @@
+Please act as a professional verilog designer.
+
+Implement a module to achieve serial input data accumulation output, input input 8bit data, whenever the module receives 4 input data, the output outputs 4 received data accumulation results. The input and output interfaces interact with the upstream and downstream using the valid-ready two-way handshake mechanism. When both upstream and downstream are required to be able to transmit at full speed, there is no bubble in data transmission, and no additional performance loss can be caused due to the design of this module.
+Module name:  
+    accu               
+Input ports：
+    input 				clk 		,   
+	input 				rst_n		,
+	input		[7:0]	data_in		,
+	input				valid_a		,
+	input	 			ready_b		,        
+Output ports：
+    output		 		ready_a		,
+ 	output	reg			valid_b		,
+	output  reg [9:0] 	data_out

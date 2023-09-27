@@ -1,0 +1,11 @@
+Please act as a professional verilog designer.
+
+Implement a 16-bit divider module, dividend is 16-bit and divider is 8-bit. Extract the higher bits of the dividend, matching the bit width of the divisor. Compare these bits with the divisor: if the dividend bits are greater, set the quotient to 1, otherwise set it to 0, and use the difference as the remainder. Concatenate the remainder with the highest remaining 1-bit of the dividend, and repeat the process until all dividend bits are processed.
+Module name:
+div_16bit
+Input ports：
+input wire [15:0] A,
+input wire [7:0] B,
+Output ports：
+output wire [15:0] result,
+output wire [15:0] odd

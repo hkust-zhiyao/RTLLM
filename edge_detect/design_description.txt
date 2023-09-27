@@ -1,0 +1,12 @@
+Please act as a professional verilog designer.
+
+Implement a module for edge detection, there is a slowly changing 1 bit signal a. When the rising edge of signal a is detected, the indicating signal rise is given; when the falling edge of signal A is shown, the indicating signal down is given. rise and down are high on the next clock when the corresponding edge appears, and then return to 0 until the corresponding edge appears again.
+Module name:  
+    edge_detect               
+Input ports：
+    input clk,
+	input rst_n,
+	input a 
+Output ports：
+    output reg rise,
+	output reg down

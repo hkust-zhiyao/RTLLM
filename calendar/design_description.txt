@@ -1,0 +1,12 @@
+Please act as a professional verilog designer.
+
+Implement a module of perpetual calendar. The output port Secs counts from 0 to 59, and when the Secs count reaches 59, the output port Mins increases by one and stops counting until minute=59. When the Mins count reaches 59, the output port Hours increases by one and stops counting until Hours=24.
+Module name:  
+    calendar               
+Input ports：
+    input CLK,
+    input RST
+Output ports：
+    output [5:0] Hours,
+    output [5:0] Mins,
+    output [5:0] Secs

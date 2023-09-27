@@ -1,0 +1,12 @@
+Please act as a professional verilog designer.
+
+Implement a frequency divider that the input clock frequency of 100MHz signal, and the outputs are 3 clock frequencies: 50MHz, 10MHz, 1MHz.
+Module name:  
+    freq_div               
+Input ports：
+    input CLK_in,
+	input RST
+Output ports：
+    output reg CLK_50,
+    output reg CLK_10,
+    output reg CLK_1

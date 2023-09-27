@@ -1,0 +1,12 @@
+Please act as a professional verilog designer.
+
+Implement a module of an 8 bit adder in gate level.
+Module name:  
+    adder_8bit               
+Input ports：
+    input [7:0] a, b,
+    input cin
+Output ports：
+    output [7:0] sum,
+    output SUM,
+    output cout

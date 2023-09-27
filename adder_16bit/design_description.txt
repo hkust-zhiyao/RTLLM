@@ -1,0 +1,12 @@
+Please act as a professional verilog designer.
+
+Implement a module of a 16-bit full adder.
+Module name:  
+    adder_16bit               
+Input ports：
+    input    [15:0]  a,
+    input    [15:0]  b,
+    input            c_up
+Output ports：
+    output    [15:0]  y,
+    output            Co

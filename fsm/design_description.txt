@@ -1,0 +1,11 @@
+Please act as a professional verilog designer.
+
+Implement a FSM detection circuit that detects a single bit input IN. When the input is 10011, output MATCH is high, and MATCH is 0 in other cases.
+Module name:  
+    fsm               
+Input ports：
+    input CLK,
+    input RST,
+    input IN
+Output ports：
+    output reg MATCH

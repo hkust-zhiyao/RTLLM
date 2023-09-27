@@ -1,0 +1,11 @@
+Please act as a professional verilog designer.
+
+Implement a module of a carry lookahead 32 bit adder based on CLAs.
+Module name:  
+    adder_32bit               
+Input ports：
+    input [32:1] A,
+    input [32:1] B
+Output ports：
+    output [32:1] S,
+    output C32
