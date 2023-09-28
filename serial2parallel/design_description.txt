@@ -1,0 +1,14 @@
+Please act as a professional verilog designer.
+
+Implement a series-parallel conversion circuit, the input end inputs single bit data, and when the module receives 6 input data, the output end outputs the 6bit data after splicing. The module adopts the valid-ready two-way handshake mechanism between the input and upstream, and the valid-only handshake mechanism between the output and downstream. During data concatenation, the received data is placed in the lower part of data_b. 
+Module name:  
+    s_to_p               
+Input ports：
+    input 				clk 		,   
+	input 				rst_n		,
+	input				valid_a		,
+	input	 			data_a		
+Output ports：
+    output	reg 		ready_a		,
+ 	output	reg			valid_b		,
+	output  reg [5:0] 	data_b
