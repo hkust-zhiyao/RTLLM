@@ -34,6 +34,36 @@ RTL Generation with Large Language Model Benchmark for generating design RTL wit
 
 Please refer to the respective folders for each design to access the files mentioned above.
 
+### Run Makefile
+
+You can run makefile to test the functionality of the code.
+
+Step 1. Replace #DESIGN_NAME# with the design name you need to test.
+```
+TEST_DESIGN = #DESIGN_NAME#
+```
+Step 2. Compile the Verilog file.
+
+```
+make vcs
+```
+Step 3. Functionality test
+```
+make sim
+```
+Step 4. View the results
+```
+===========Your Design Passed===========
+or
+===========Error===========
+or
+===========Test completed with */N failures===========
+```
+Step 5. Clear output files
+```
+make clean
+```
+
 ## Workflow
   
 **Fig.1** Complete RTL generation and evaluation workflow using this benchmark, including three straightforward stages.
