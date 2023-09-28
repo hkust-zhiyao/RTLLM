@@ -1,0 +1,13 @@
+Please act as a professional verilog designer.
+
+Implement a data width conversion circuit that converts 8-bit data input to 16-bit data output. The first arriving 8-bit data should be placed in the higher 8 bits of the 16-bit data output. 
+Module name:  
+    width_8to16               
+Input ports：
+    input                 clk      ,   
+    input                 rst_n    ,
+    input                 valid_in ,
+    input  [7:0]          data_in    
+Output ports：
+    output   reg          valid_out,
+    output   reg [15:0]   data_out

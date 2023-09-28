@@ -1,0 +1,17 @@
+Please act as a professional verilog designer.
+
+Implement a true dual-port RAM with a depth of 8 and a bit width of 4 bits, with all data initialized to 0000. It has two groups of ports, respectively for reading data and writing data, and read and write operations can be carried out at the same time. When the read_en signal is valid, the read_data of the corresponding position is read through the read_addr signal and output; When the write_en signal is valid, data is written to the corresponding position through the write_addr signal and write-data signal.
+Module name:  
+    RAM               
+Input ports：
+    input clk,
+	input rst_n,
+	
+	input write_en,
+	input [7:0]write_addr,
+	input [3:0]write_data,
+	
+	input read_en,
+	input [7:0]read_addr,
+Output ports：
+    output reg [3:0]read_data

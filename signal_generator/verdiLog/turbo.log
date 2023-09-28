@@ -1,0 +1,3 @@
+Command Line: /usr/eelocal/synopsys/verdi-vt2022.06/platform/LINUXAMD64/bin/Novas -i -simflow -simBin ./simv -simOpt  
+uname(Linux acf3030 3.10.0-1160.66.1.el7.x86_64 #1 SMP Wed May 18 16:02:34 UTC 2022 x86_64)
+au time 0.006152 0.004086 0.002201 delta 10330112 10330112 total 544497664 544497664

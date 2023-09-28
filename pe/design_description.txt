@@ -1,0 +1,13 @@
+Please act as a professional verilog designer.
+
+Implement a Multiplying Accumulator for 32bit integer. In the MAC_PE, there is a register that stores the partial sum (the intermediate accumulation result), and in each cycle, the result of “a multiplied by b” will be accumulated in this register, and the “c” shows the value of the register.
+
+Module name:  
+    pe               
+Input ports：
+    input clk,
+    input rst,
+    input [31:0] a,
+    input [31:0] b,
+Output ports：
+    output [31:0] c

@@ -1,0 +1,11 @@
+Please act as a professional verilog designer.
+
+Implement a signal generator module, select the signal wave_choise according to the waveform to send out the corresponding waveform: wave_choice=0, send out the square wave signal; wave_choice=1, sends a sawtooth signal; wave_choice=2, the triangular wave signal is emitted. 
+Module name:  
+    signal_generator               
+Input ports：
+    input clk,
+	input rst_n,
+	input [1:0] wave_choise
+Output ports：
+    output reg [4:0]wave
