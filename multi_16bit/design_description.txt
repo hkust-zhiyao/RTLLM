@@ -1,0 +1,14 @@
+Please act as a professional verilog designer.
+
+Implement the design of unsigned 16bit multiplier based on shifting and adding opration. 
+Module name:  
+    multi_16bit               
+Input ports：
+    input clk;       
+    input rst_n;      
+    input start;      // Chip enable signal. 
+    input [15:0] ain; 
+    input [15:0] bin;
+Output ports：
+    output [31:0] yout; // Product output with a data width of 32 bits.
+    output done;      // Chip output flag signal. Defined as 1 indicates multiplication operation completion.
