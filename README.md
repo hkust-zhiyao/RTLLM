@@ -10,7 +10,7 @@
 # RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
 Yao Lu, Shang Liu, Qijun Zhang, and Zhiyao Xie, "RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model," Asia and South Pacific Design Automation Conference (ASP-DAC) 2024.[[paper]](https://arxiv.org/pdf/2308.05345.pdf)
  
-## Documents
+## 1. Documents
 
 RTL Generation with Large Language Model Benchmark for generating design RTL with natural language (under construction). This repository contains a total of 30 designs. Each design has its own folder, which includes several files:
 
@@ -35,7 +35,7 @@ RTL Generation with Large Language Model Benchmark for generating design RTL wit
 
 Please refer to the respective folders for each design to access the files mentioned above.
 
-### Run Makefile
+## 2. Run Makefile
 
 You can run makefile to test the functionality of the code.
 
@@ -65,7 +65,7 @@ Step 5. Clear output files
 make clean
 ```
 
-## Workflow
+## 3. Workflow
   
 **Fig.1** Complete RTL generation and evaluation workflow using this benchmark, including three straightforward stages.
 
@@ -84,7 +84,7 @@ Fig.1: The workflow of adopting RTLLM for completely automated design RTL genera
 - **Testbench** (_testbench.v_) denoted as 𝒯: A testbench with multiple test cases, each with input values and correct output values. The testbench corresponds to the pre-defined module name and I/O signals in 𝓛. It can be applied to verify the correctness of design functionality.
 - **Correct Design** (_designer_RTL.v_) denoted as 𝒱ₕ: A reference design Verilog hand-crafted by human designers. By comparing with this reference design 𝒱ₕ, we can quantitatively evaluate the design qualities of the automatically generated design 𝒱. Also, these correct designs have all passed our proposed testbenches.
 
-## Experiments
+## 4. Experiments
 
 **Fig.2** summarizes the quantitative evaluation of both syntax and functionality correctness of all five evaluated LLMs using RTLLM. 
 
