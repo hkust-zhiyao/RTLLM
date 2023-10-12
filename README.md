@@ -8,6 +8,7 @@
                                               
 ```
 # RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
+Yao Lu, Shang Liu, Qijun Zhang, and Zhiyao Xie, "RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model," Asia and South Pacific Design Automation Conference (ASP-DAC) 2024.[[paper]](https://arxiv.org/pdf/2308.05345.pdf)
  
 ## Documents
 
