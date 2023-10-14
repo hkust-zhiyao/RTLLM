@@ -1,0 +1,14 @@
+Please act as a professional verilog designer.
+
+Implement an 8bit booth-4 multiplier. 
+Module name:  
+    booth4_mul               
+Input ports：
+    input                            clk,
+    input                            rstn,
+    input                            vld_in,
+    input      [        WIDTH_M-1:0] multiplicand,
+    input      [        WIDTH_R-1:0] multiplier
+Output ports：
+    output     [WIDTH_M+WIDTH_R-1:0] mul_out,
+    output reg                       done

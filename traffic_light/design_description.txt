@@ -1,0 +1,15 @@
+Please act as a professional verilog designer.
+
+Implement a traffic light, with red, yellow and green three small indicators and a pedestrian button, under normal circumstances, the motor vehicle lane indicator light according to 60 clock cycles of green, 5 clock cycles of yellow, 10 clock cycles of red. When the pedestrian button is pressed, if the remaining green time is greater than 10 clocks, it is shortened to 10 clocks, and if it is less than 10 clocks, it remains unchanged.
+Note: The lane light and the sidewalk light should be paired, when the lane light is green or yellow, the sidewalk light is red; When the lane light is red, the sidewalk light is green, and for the sake of simplicity, only the lane light is considered.
+Module name:  
+    traffic_light               
+Input ports：
+    input rst_n, 
+    input clk,
+    input pass_request
+Output ports：
+    output wire[7:0]clock,
+    output reg red,
+    output reg yellow,
+    output reg green

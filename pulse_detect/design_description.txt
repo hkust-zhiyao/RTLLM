@@ -1,0 +1,12 @@
+Please act as a professional verilog designer.
+
+Implement the design where a single clock-cycle width pulse(data_in) is extracted from the A clock(fast) domain and a new single clock-width pulse (data_out) will be created in the clock domain B(slow). The frequency of clock domain A is 10 times that of clock domain B.
+Module name:  
+    pulse_detect               
+Input ports：
+    input                 clk_fast    , 
+    input                 clk_slow    ,   
+    input                 rst_n        ,
+    input                 data_in	
+Output ports：
+     output               dataout
