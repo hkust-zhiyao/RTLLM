@@ -1,0 +1,12 @@
+Please act as a professional verilog designer.
+
+Implement a module for parallel-to-serial conversion, where every four input bits are converted to one output bit. The output signal valid_in indicates the validity of the input at that time. 
+Module name:  
+    p_to_s               
+Input ports：
+    input  clk  ,
+	input  rst  ,
+	input  [3:0]d 
+Output ports：
+    output  valid_in ,
+	output  dout
