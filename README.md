@@ -7,7 +7,10 @@
  |_|  \_\    |_|    |______| |______| |_|  |_|
                                               
 ```
-# RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
+# RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model[^1]
+
+[^1]: The two designs of radix2_div and traffic_light are still incomplete, and we will continue to maintain them.
+
 Yao Lu, Shang Liu, Qijun Zhang, and Zhiyao Xie, "RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model," Asia and South Pacific Design Automation Conference (ASP-DAC) 2024.[[paper]](https://arxiv.org/pdf/2308.05345.pdf)
  
 ## 1. Documents
@@ -35,7 +38,8 @@ RTL Generation with Large Language Model Benchmark for generating design RTL wit
 
 Please refer to the respective folders for each design to access the files mentioned above.
 
-## 2. Run Makefile
+## 2. Run Makefile [^2]
+[^2]: We have recently provided an automated Python script (auto_run.py) that you can use as a one-click compilation for all designs after simple modification.
 
 You can run makefile to test the functionality of the code.
 
@@ -96,9 +100,9 @@ Fig.2: The Syntax and Functionality Correctness Verification for Different LLMs
  
 ---
  
-**Fig.3** summarizes the design qualities of generated design RTL from different LLMs[^1]. These quality values are measured on each post-synthesis netlist. We report the worst negative slack (WNS) as the timing metric. It also presents the qualities of our designer-generated reference design 𝒱ₕ in RTLLM. All these reference designs are functionally correct.
+**Fig.3** summarizes the design qualities of generated design RTL from different LLMs[^3]. These quality values are measured on each post-synthesis netlist. We report the worst negative slack (WNS) as the timing metric. It also presents the qualities of our designer-generated reference design 𝒱ₕ in RTLLM. All these reference designs are functionally correct.
 
-[^1]: The worst LLM StarCoder is not presented due to space limitations.
+[^3]: The worst LLM StarCoder is not presented due to space limitations.
 
 <img src="https://github.com/hkust-zhiyao/RTLLM/blob/main/_pic/DC_Results.png" width="800px">
 Fig.3: The Design Qualities of Gate-Level Netlist, Synthesized with Design Compiler.
