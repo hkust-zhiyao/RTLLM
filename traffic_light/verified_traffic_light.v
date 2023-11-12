@@ -43,7 +43,7 @@ always @(posedge clk or negedge rst_n)
 				p_green <= 1'b0;
 				p_yellow <= 1'b0;
 				if (cnt == 3) 
-					state <= s2_yellow;
+					state <= s3_green;
 				else
 					state <= s1_red;
 			end
@@ -53,7 +53,7 @@ always @(posedge clk or negedge rst_n)
 				p_green <= 1'b0;
 				p_yellow <= 1'b1;
 				if (cnt == 3) 
-					state <= s3_green;
+					state <= s1_red;
 				else
 					state <= s2_yellow;
 			end
@@ -63,7 +63,7 @@ always @(posedge clk or negedge rst_n)
 				p_green <= 1'b1;
 				p_yellow <= 1'b0;
 				if (cnt == 3) 
-					state <= s1_red;
+					state <= s2_yellow;
 				else
 					state <= s3_green;
 			end
