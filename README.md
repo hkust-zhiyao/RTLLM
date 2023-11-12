@@ -7,9 +7,8 @@
  |_|  \_\    |_|    |______| |______| |_|  |_|
                                               
 ```
-# RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model[^1]
+# RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
 
-[^1]: The two designs of radix2_div and traffic_light are still incomplete, and we will continue to maintain them.
 
 Yao Lu, Shang Liu, Qijun Zhang, and Zhiyao Xie, "RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model," Asia and South Pacific Design Automation Conference (ASP-DAC) 2024.[[paper]](https://arxiv.org/pdf/2308.05345.pdf)
  
