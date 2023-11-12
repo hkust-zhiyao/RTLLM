@@ -1,0 +1,51 @@
+Please act as a professional verilog designer.
+
+Implement a simplified radix-2 divider module and the inputs are two 8-bit operands. The module uses a simple 4-state finite state machine (FSM) to control the division process.
+It has a parameter DATAWIDTH, which is set to 8 by default but can be changed when instantiating the module.
+
+Module name:  
+    radix2_div 
+
+Parameter：
+DATAWIDTH = 8  
+Input ports：
+    input 		[DATAWIDTH-1:0]	dividend 	,  		
+    input 		[DATAWIDTH-1:0]	divisor 	,   	
+    input						clk 	 	,	 	
+    input                       rst_n	    ,
+    input                       en
+Output ports：
+    output 		[DATAWIDTH-1:0] quotient 	,  		
+    output 		[DATAWIDTH-1:0] remainder   ,
+    output wire         ready       ,
+    output wire         vld_out
+
+State Machine:
+IDLE: Initial state, waiting for the enable signal (en) to become active.
+SUB: Subtract state, where the actual subtraction of divisor from dividend takes place.
+SHIFT: Shift state, shifting the dividend left (effectively multiplying by 2) until a certain condition is met.
+DONE: Done state, indicating the completion of the division.
+
+State Transition Logic:
+The next_state logic determines the next state based on the current state and the enable signal.
+State Register:
+current_state: Represents the current state of the FSM.
+next_state: Represents the next state to transition to.
+
+Data Registers:
+dividend_e: Extended version of the dividend to facilitate arithmetic operations.
+divisor_e: Extended version of the divisor.
+quotient_e: Register to store the calculated quotient.
+remainder_e: Register to store the calculated remainder.
+count: Counter for tracking the number of shifts performed.
+
+State Transition and Data Computation:
+State transition and data computation are performed in the combinational blocks using always @(*) and case statements.
+
+Output Assignments:
+quotient and remainder are assigned values from their respective registers.
+ready is asserted when the current state is IDLE.
+vld_out is asserted when the current state is DONE.
+
+Reset Logic:
+Resets all data registers and counters to zero on a negative edge of the asynchronous reset signal.
