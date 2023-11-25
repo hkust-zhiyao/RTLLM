@@ -100,7 +100,7 @@ Fig.1: The workflow of adopting RTLLM for completely automated design RTL genera
 - Syntax Correctness: Number of generated design RTLs 𝒱 with correct syntax, out of the five trials.
 - Functionality Correctness: A success ✅ as long as there is one generated RTL successfully passing the testbench 𝒯, out of the ones already with correct syntax.
   
-<img src="https://github.com/hkust-zhiyao/RTLLM/blob/main/_pic/Syntax_and_Functionality_Verification.png" width="800px">
+<img src="https://github.com/hkust-zhiyao/RTLLM/blob/main/_pic/update_Syntax_and_Functionality_Verification.png" width="800px">
 Fig.2: The Syntax and Functionality Correctness Verification for Different LLMs
  
 ---
