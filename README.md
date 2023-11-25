@@ -9,7 +9,9 @@
 ```
 **Version 1.1** 
 
-We will be releasing v1.1 within 2-3 weeks, which fixes some errors found in v1.0 and includes additional test cases. --25 Nov. 2023
+We will be releasing v1.1 within 2-3 weeks, which fixes some errors found in v1.0 and includes additional test cases. 
+
+--25 Nov. 2023
 
 # RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
 
