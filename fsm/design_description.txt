@@ -1,11 +1,19 @@
 Please act as a professional verilog designer.
 
-Implement a FSM detection circuit that detects a single bit input IN. When the input is 10011, output MATCH is high, and MATCH is 0 in other cases.
+Implement a Mealy FSM detection circuit that detects a single-bit input IN. When the input is 10011, output MATCH is 1, and MATCH is 0 in other cases. Support for continuous input and loop detection. 
+
 Module name:  
     fsm               
-Input ports：
-    input CLK,
-    input RST,
-    input IN
-Output ports：
-    output reg MATCH
+Input ports:
+    IN: Input signal to the FSM.
+    CLK: Clock signal used for synchronous operation.
+    RST: Reset signal to initialize the FSM.
+Output ports:
+    MATCH: Output signal indicating a match condition based on the FSM state.
+
+Implementation:
+The module implements an FSM detection.
+On every change in the input signal (IN) or positive edge of CLK or RST, if RST is active, the output signal MATCH is set to 0.
+If the sequence of inputs IN is 1, 0, 0, 1, 1, the MATCH signal is 1 at the same time as the last occurrence of IN=1. If the sequence of inputs IN is 1, 0, 0, 1, 1, 0, 0, 1, 1, the MATCH signal becomes 1 at the fifth and ninth of IN; otherwise, it is set to 0.
+
+Give me the complete code.

@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_traffic_light
+TEST_DESIGN = traffic_light
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

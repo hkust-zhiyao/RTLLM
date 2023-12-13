@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_radix2_div
+TEST_DESIGN = radix2_div
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

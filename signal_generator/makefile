@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_signal_generator
+TEST_DESIGN = signal_generator
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

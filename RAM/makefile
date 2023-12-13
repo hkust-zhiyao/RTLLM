@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_RAM
+TEST_DESIGN = RAM
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

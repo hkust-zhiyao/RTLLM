@@ -2,21 +2,15 @@
 
 module tb_valid_ready;
 
-// valid_ready Parameters
+
 parameter PERIOD  = 10;
-
-
-// valid_ready Inputs
 reg   clk                                  = 0 ;
 reg   rst_n                                = 0 ;
 reg   [7:0]  data_in                       = 0 ;
-reg   valid_a                              = 0 ;
-reg   ready_b                              = 0 ;
+reg   valid_in                             = 0 ;
 
-// valid_ready Outputs
-wire  ready_a                              ;
-wire  valid_b                              ;
-wire  [9:0]  data_out                      ;
+wire  valid_out                              ;
+wire  [9:0]  data_out                       ;
 
 
 initial
@@ -29,65 +23,58 @@ begin
     #(PERIOD*2) rst_n  =  1;
 end
 
-verified_accu  verified_accu (
+accu  uut (
     .clk                     ( clk             ),
     .rst_n                   ( rst_n           ),
     .data_in                 ( data_in   [7:0] ),
-    .valid_a                 ( valid_a         ),
-    .ready_b                 ( ready_b         ),
+    .valid_in                ( valid_in        ),
 
-    .ready_a                 ( ready_a         ),
-    .valid_b                 ( valid_b         ),
+    .valid_out               ( valid_out       ),
     .data_out                ( data_out  [9:0] )
 );
 
 initial
 begin
-    #(PERIOD*1.5+0.01);
-    #(PERIOD)   data_in = 8'd1;valid_a = 1;
+    #(PERIOD*1+0.01); 
+    #(PERIOD)   data_in = 8'd1;valid_in = 1;
     #(PERIOD)   data_in = 8'd2;
     #(PERIOD)   data_in = 8'd3;
-    #(PERIOD)   data_in = 8'd4;
+    #(PERIOD)   data_in = 8'd14;
+
     #(PERIOD)   data_in = 8'd5;
-    #(PERIOD*2) ready_b = 1;
     #(PERIOD)   data_in = 8'd2;
-    #(PERIOD)   data_in = 8'd3;
-    #(PERIOD)   data_in = 8'd4;valid_a = 0;
-    #(PERIOD)   data_in = 8'd5;valid_a = 1;
+    #(PERIOD)   data_in = 8'd103;
+    #(PERIOD)   data_in = 8'd4;
+
+    #(PERIOD)   data_in = 8'd5;
     #(PERIOD)   data_in = 8'd6;
-    #(PERIOD)   ready_b = 1;
-    #(PERIOD*2) ready_b = 0;
+    #(PERIOD)   data_in = 8'd3;
+    #(PERIOD)   data_in = 8'd54;
+    #(PERIOD*2);
     $finish;
 end
 
-reg [3:0] result [0:12];
+reg [9:0] result [0:2];
 initial begin
-    result[0] = 4'b0001;
-    result[1] = 4'b0011;
-    result[2] = 4'b0110;
-    result[3] = 4'b1010;
-    result[4] = 4'b1010;
-    result[5] = 4'b1010;
-    result[6] = 4'b0101;
-    result[7] = 4'b0111;
-    result[8] = 4'b1010;
-    result[9] = 4'b1010;
-    result[10] = 4'b1111;
-    result[11] = 4'b0110;
-    result[12] = 4'b1100;
+    result[0] = 9'd20;
+    result[1] = 9'd114;
+    result[2] = 9'd68;
 end
 
 integer i;
+integer casenum = 0;
 integer error = 0;
+
 initial
 begin
-    #((PERIOD) * 3);
-    for (i = 0; i < 13; i = i + 1) begin
-            #((PERIOD) * 1);
-            error = (data_out == result[i]) ? error : error + 1;
+    for (i = 0; i < 15; i = i + 1) begin
+        #((PERIOD) * 1);         
+        if (valid_out) begin
+            error = (data_out == result[casenum]) ? error : error + 1;
+            casenum = casenum + 1;
+        end        
     end
-
-    if(error==0)
+    if(error==0 && casenum==3)
 	begin
 		$display("===========Your Design Passed===========");
         end
@@ -95,7 +82,7 @@ begin
 	begin
 		$display("===========Error===========");
 	end
-
+    $finish;
 end
 
 

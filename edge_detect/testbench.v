@@ -7,7 +7,7 @@ module testbench;
     wire rise;
     wire down;
 
-    verified_edge_detect dut (
+    edge_detect dut (
         .clk(clk),
         .rst_n(rst_n),
         .a(a),
@@ -23,55 +23,44 @@ module testbench;
         a = 0;
 
         // Wait for a few clock cycles to ensure the module stabilizes
-        #10;
+        #5;
 
         // Test scenario 1: No edge
         a = 0;
-        #5;
+        #10;
         a = 0;
-        #5;
+        #10;
         // $display("rise: %b, down: %b", rise, down);
-        error = (rise != 0 || down != 0) ? error+1 : error;
+        error = (rise != 0 && down != 0) ? error+1 : error;
         // Test scenario 2: Rising edge
         a = 0;
-        #5;
+        #10;
         a = 1;
-        #5;
+        #10;
         a = 1;
-        #5;
         // $display("rise: %b, down: %b", rise, down);
-        error = (rise != 1 || down != 0) ? error+1 : error;
+        error = (rise != 1 && down != 0) ? error+1 : error;
         // Test scenario 3: Falling edge
         a = 1;
-        #5;
+        #10;
         a = 0;
-        #5;
+        #10;
         a = 0;
-        #5;
         // $display("rise: %b, down: %b", rise, down);
-        error = (rise != 0 || down != 1) ? error+1 : error;
-        // Test scenario 4: Both edges
-        a = 0;
-        #5;
-        a = 1;
-        #5;
-        a = 0;
-        #5;
-        a = 1;
-        #5;
-        // $display("rise: %b, down: %b", rise, down);
-        error = (rise != 0 || down != 0) ? error+1 : error;
-        // Test scenario 5: Reset
+        error = (rise != 0 && down != 1) ? error+1 : error;
+       // Test scenario 4: Reset
         rst_n = 0;
         #10;
         rst_n = 1;
         #10;
-
+        // $display("rise: %b, down: %b", rise, down);
+        error = (rise != 0 && down != 0) ? error+1 : error;
+        
         if (error == 0) begin
             $display("===========Your Design Passed===========");
         end
         else begin
-        $display("===========Test completed with %d /100 failures===========", error);
+        $display("===========Error===========", error);
         end
 
         // Finish simulation

@@ -6,7 +6,6 @@ module testbench;
   reg [7:0] b;
   reg cin;
   wire [7:0] sum;
-  wire SUM;
   wire cout;
   
   integer i; // Declare the loop variable here
@@ -14,24 +13,21 @@ module testbench;
   integer error = 0;
   
   // Instantiate the module
-  verified_adder_8bit uut (
+  adder_8bit uut (
     .a(a), 
     .b(b), 
     .cin(cin), 
     .sum(sum), 
-    .SUM(SUM), 
     .cout(cout)
   );
   
   // Randomize inputs and check output
   initial begin
     for (i = 0; i < 100; i = i + 1) begin
-        a = $random & 8'hff;  // Limit to 8 bits
-        b = $random & 8'hff;  // Limit to 8 bits
-        cin = $random & 1'b1; // Limit to 1 bit
-
-        #10; // Wait for the output to be computed
-
+        a = $random & 8'hff;
+        b = $random & 8'hff;
+        cin = $random & 1'b1;
+        #10;
         error = (sum !== a + b + cin) ? error+1 : error; 
     end
     if (error == 0) begin

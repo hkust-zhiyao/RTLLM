@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_calendar
+TEST_DESIGN = counter_12
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

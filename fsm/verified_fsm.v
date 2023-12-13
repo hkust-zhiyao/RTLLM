@@ -65,10 +65,10 @@ always@(*) begin
 	endcase
 end
 
-always@(posedge CLK or posedge RST) begin
+always@(*) begin
         if(RST)
                 MATCH  <= 0;
-        else if (ST_cr == s5)
+        else if (ST_cr == s4 && IN == 1)
                 MATCH  <= 1;
 	else 
 		MATCH  <= 0;

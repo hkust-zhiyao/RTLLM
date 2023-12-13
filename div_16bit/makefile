@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_div_16bit
+TEST_DESIGN = div_16bit
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

@@ -1,63 +1,77 @@
 `timescale 1ns/1ns
 
-module verified_pulse_detect_tb;
-  reg clk_fast;
-  reg clk_slow;
+module pulse_detect_tb;
+  reg clk;
   reg rst_n;
   reg data_in;
-  wire dataout;
+  wire data_out;
 
   // Instantiate the DUT (Design Under Test)
-  verified_pulse_detect dut (
-    .clk_fast(clk_fast),
-    .clk_slow(clk_slow),
+  pulse_detect dut (
+    .clk(clk),
     .rst_n(rst_n),
     .data_in(data_in),
-    .dataout(dataout)
+    .data_out(data_out)
   );
 
   // Generate clock
-  always #2 clk_fast = ~clk_fast;
-  always #20 clk_slow = ~clk_slow;
+  initial begin
+	clk=0;
+	forever #5 clk=~clk;
+  end
 
   integer error = 0;
   initial begin
-    // Initialize inputs
-    clk_fast = 0;
-    clk_slow = 0;
-    rst_n = 0;
-    data_in = 0;
+      // Initialize inputs
+      #10;
+      rst_n = 0;
+      data_in = 0;
+      #28;
+      rst_n = 1;
+      #10      data_in = 0;
+      #10      data_in = 0;  
+      #10      data_in = 0;
+      #10      data_in = 1;
+      #10      data_in = 0;
+      #10      data_in = 1;
+      #10      data_in = 0;
+      #10      data_in = 1;
+      #10      data_in = 1;
+      #10      data_in = 0;
+      #10;
+      // Finish simulation
+      $finish;
+  end
 
-    // Wait for a few clock cycles for reset to settle
-    #20;
-
-    // Apply reset
-    rst_n = 1;
-
-    // Perform test case
+  initial begin
+    #5;
     #10;
-    data_in = 0;
-    #50;
-    data_in = 1;
-    #50;
-    data_in = 1;
-    #50;
-    // $display("dataout = %b", dataout);
-    error = (dataout==1)? error :error+1;
-    data_in = 1;
-    #50;
-    data_in = 0;
-    #50;
-    // $display("dataout = %b", dataout);
-    error = (dataout==0)? error :error+1;
-
+    error = (data_out == 0) ? error : error+1;
+    #10;
+    error = (data_out == 0) ? error : error+1;
+    #10;
+    error = (data_out == 0) ? error : error+1;
+    #10;
+    error = (data_out == 0) ? error : error+1;
+    #10;
+    error = (data_out == 0) ? error : error+1;
+    #10;
+    error = (data_out == 0) ? error : error+1;
+    #10;
+    error = (data_out == 0) ? error : error+1;
+    #10;
+    error = (data_out == 0) ? error : error+1;
+    #10;
+    error = (data_out == 1) ? error : error+1;
+    // $display("%b,%b,%b", data_in, data_out, dut.pulse_level1);//1
+    #20;
+    error = (data_out == 1) ? error : error+1;
+    #10;
     if (error == 0) begin
-            $display("===========Your Design Passed===========");
-     end
-     else begin
-     $display("===========Failed===========");
-     end
-    // Finish simulation
-    $finish;
+        $display("===========Your Design Passed===========");
+    end
+    else begin
+    $display("===========Error===========");
+    end
   end
 endmodule

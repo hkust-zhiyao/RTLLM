@@ -12,11 +12,9 @@ module tb_multi_pipe();
      wire mul_en_out;
      wire [15:0] mul_out;
 
-     integer i; // Declare the loop variable here
-     integer fail_count; // Declare a variable to count the 
      reg [15:0] expected_product;
  
- verified_multi_pipe_8bit u1(
+ multi_pipe_8bit u1(
           .clk(clk),      
           .rst_n(rst_n),       
           .mul_a(mul_a),       
@@ -49,16 +47,24 @@ initial begin
      mul_b = 'd20;
      mul_en_in = 'd1;
      repeat (100) begin
+          mul_en_in = 0;
+          #(`clk_period*20);
+          rst_n = 1;
+          #(`clk_period*10);
+          mul_a = $random;
+          mul_b = $random;
+
+          mul_en_in = 'd1;
           #(`clk_period);
-          mul_a = mul_a + 'd1;
-          mul_b = mul_b + 'd2;
-          // mul_en_in = mul_en_in + 'd1;
           expected_product = mul_a * mul_b;
-          
-          //========it can be changed depending on your pipelining processing latency
-          #(`clk_period*4);
-          //========it can be changed depending on your pipelining processing latency
-          
+          #(`clk_period);
+          error = ((mul_en_out==1) && (mul_out == expected_product)) ? error+1 : error;
+          while (mul_en_out == 0) begin
+                @(posedge clk); // Wait for one clock cycle
+          end
+          // //========it can be changed depending on your pipelining processing latency
+          // #(`clk_period*4);
+          // //========it can be changed depending on your pipelining processing latency
           error = (mul_out != expected_product) ? error+1 : error;
           // $display("mul_a = %d, mul_b = %d, mul_out = %d, expected = %d", mul_a, mul_b, mul_out, expected_product);
      end
@@ -68,7 +74,6 @@ initial begin
      end
      else begin
      $display("===========Test completed with %d /100 failures===========", error);
-     $display("Our testbench provides the delay for the 4-stage pipeline multiplier,\nand different pipeline stages may result in your answer testing as an error.\nYou can modify it at the corresponding location in testbench.v");
      end
     
      $finish; 

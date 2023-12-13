@@ -1,11 +1,17 @@
 Please act as a professional verilog designer.
 
-Implement a module of a carry lookahead 32 bit adder based on CLAs.
+Implement a module of a carry-lookahead 32-bit adder that uses the Carry-Lookahead Adder (CLA) architecture.
+
 Module name:  
     adder_32bit               
-Input ports：
-    input [32:1] A,
-    input [32:1] B
-Output ports：
-    output [32:1] S,
-    output C32
+Input ports:
+    A[32:1]: 32-bit input operand A.
+    B[32:1]: 32-bit input operand B.
+Output ports:
+    S[32:1]: 32-bit output representing the sum of A and B.
+    C32: Carry-out output.
+
+Implementation:
+The top module adder_32bit consists of several instances of the 16 bit CLA block you design.
+
+Give me the complete code.

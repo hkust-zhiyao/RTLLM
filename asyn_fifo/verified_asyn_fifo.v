@@ -27,7 +27,8 @@ end
 
 endmodule  
 
-/***************************************AFIFO*****************************************/
+
+/**************************************AFIFO*****************************************/
 module verified_asyn_fifo#(
 	parameter	WIDTH = 8,
 	parameter 	DEPTH = 16
@@ -68,7 +69,6 @@ always @(posedge rclk or negedge rrstn) begin
 	end
 end
 
-/**********************addr gray gen*************************/
 wire 	[ADDR_WIDTH:0]	waddr_gray;
 wire 	[ADDR_WIDTH:0]	raddr_gray;
 reg 	[ADDR_WIDTH:0]	wptr;
@@ -91,7 +91,7 @@ always @(posedge rclk or negedge rrstn) begin
 		rptr <= raddr_gray;
 	end
 end
-/**********************syn addr gray*************************/
+
 reg		[ADDR_WIDTH:0]	wptr_buff;
 reg		[ADDR_WIDTH:0]	wptr_syn;
 reg		[ADDR_WIDTH:0]	rptr_buff;
@@ -116,11 +116,11 @@ always @(posedge rclk or negedge rrstn) begin
 		wptr_syn <= wptr_buff;
 	end
 end
-/**********************full empty gen*************************/
+
 assign wfull = (wptr == {~rptr_syn[ADDR_WIDTH:ADDR_WIDTH-1],rptr_syn[ADDR_WIDTH-2:0]});
 assign rempty = (rptr == wptr_syn);
 
-/**********************RAM*************************/
+/***********RAM*********/
 wire 	wen	;
 wire	ren	;
 wire 	wren;//high write

@@ -1,12 +1,12 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_freq_div
+TEST_DESIGN = freq_div
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \
 		-debug_all         							\
 		-l compile.log 								\
-		${TEST_DESIGN}.v testbench.v
+		/home/coguest/luyao/SmallDesigns/chatgpt35/t5/freq_div.v testbench.v
 
 sim:
 		./simv -l run.log

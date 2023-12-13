@@ -7,7 +7,7 @@ module test54();
     reg [31:0] a,b;
     wire [31:0] c;
     
-    verified_pe pe(clk,rst,a,b,c);
+    pe dut(clk,rst,a,b,c);
 
 
     initial begin

@@ -1,6 +1,6 @@
 Please act as a professional verilog designer.
 
-Implement an ALU for 32bit MIPS-ISA CPU. The “a” and “b” are the two oprands of the ALU, the “aluc” is the opcode, the “r” gives out the result. “zero” means if the result is zero, “carry” means if there is a carry bit, “negative” means if the result is negative, “overflow” means if the computation is overflow, the “flag” is the result of “slt” and “sltu” instructions. The supported operations and corresponding opcode are shown below:
+Implement an ALU for a 32-bit MIPS-ISA CPU. The “a” and “b” are the two operands of the ALU, the “aluc” is the opcode, and the “r” gives out the result. “zero” means if the result is zero, “carry” means if there is a carry bit, “negative” means if the result is negative, “overflow” means if the computation is overflow, the “flag” is the result of “slt” and “sltu” instructions. The supported operations and corresponding opcode are shown below:
     parameter ADD = 6'b100000;
     parameter ADDU = 6'b100001;
     parameter SUB = 6'b100010;
@@ -21,14 +21,22 @@ Implement an ALU for 32bit MIPS-ISA CPU. The “a” and “b” are the two opr
 
 Module name:  
     alu               
-Input ports：
-    input [31:0] a,
-    input [31:0] b,
-    input [5:0] aluc,
-Output ports：
-    output [31:0] r,
-    output zero,
-    output carry,
-    output negative,
-    output overflow,
-    output flag
+Input ports:
+    a: a 32-bit input operand
+    b: a 32-bit input operand
+    aluc: a 6-bit control signal for selecting the operation to be performed
+Output ports:
+    r: a 32-bit output representing the result of the operation
+    zero: a 1-bit output indicating whether the result is zero
+    carry: a 1-bit output indicating whether a carry occurred during the operation
+    negative: a 1-bit output indicating whether the result is negative
+    overflow: a 1-bit output indicating whether an overflow occurred during the operation
+    flag: a 1-bit output representing a general flag, which is set based on specific operations (SLT and SLTU)
+
+Implementation:
+The module uses parameters to define the control signals for various operations, such as ADD, SUB, AND, OR, etc. 
+The module assigns the input operands to the signed wires and the output result (r) to the lower 32 bits of the register (res[31:0]). The flag output is determined based on the control signal (aluc) and is set to '1' when the operation is SLT or SLTU, and 'z' (high-impedance) otherwise. The zero output is set to '1' when the result is all zeros, and '0' otherwise.
+Inside the always block, a case statement is used to perform the appropriate operation based on the control signal (aluc). The result is assigned to the register (res) accordingly. For shift operations (SLL, SRL, SRA, SLLV, SRLV, SRAV), the shift amount is determined by the value of 'a' or 'a[4:0]'. For the LUI operation, the upper 16 bits of 'a' are concatenated with 16 zeros to form the result.
+If the control signal (aluc) does not match any defined operation, the result is assigned as 'z' (high-impedance).
+
+Give me the complete code.

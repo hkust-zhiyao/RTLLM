@@ -1,14 +1,21 @@
 Please act as a professional verilog designer.
 
-Implement a series-parallel conversion circuit, the input end inputs single bit data, and when the module receives 6 input data, the output end outputs the 6bit data after splicing. The module adopts the valid-ready two-way handshake mechanism between the input and upstream, and the valid-only handshake mechanism between the output and downstream. During data concatenation, the received data is placed in the lower part of data_b. 
+Implement a series-parallel conversion circuit. It receives a serial input signal "din_serial" along with a control signal "din_valid" indicating the validity of the input data. The module operates on the rising edge of the clock signal "clk" and uses a synchronous design. The input din_serial is a single-bit data, and when the module receives 8 input data, the output dout_parallel outputs the 8-bit data(The serial input values are sequentially placed in dout_parallel from the most significant bit to the least significant bit), and the dout_valid is set to 1.
+
 Module name:  
-    s_to_p               
-Input ports：
-    input 				clk 		,   
-	input 				rst_n		,
-	input				valid_a		,
-	input	 			data_a		
-Output ports：
-    output	reg 		ready_a		,
- 	output	reg			valid_b		,
-	output  reg [5:0] 	data_b
+    serial2parallel          
+
+Input ports:
+	clk: Clock signal.
+	rst_n: Reset signal (active low).
+	din_serial: Serial input data.
+	din_valid: Validity signal for input data.	
+
+Output ports:
+	dout_parallel: Parallel output data (8 bits wide).
+	dout_valid: Validity signal for the output data.
+
+Implementation:
+The module utilizes a 4-bit counter (cnt) to keep track of the number of serial input data bits received. Every eight din_serial input, dout_parallel will output. When all 8 serial data bits have been received, the valid output signal is set to 1, indicating that the parallel output data is valid. Otherwise, the valid output signal is set to 0, indicating that the parallel output data is not valid.
+
+Give me the complete code.

@@ -18,9 +18,9 @@ end
 
 always@(*) begin
     begin
-        tmp_a = {16'b0,a_reg};
-        tmp_b = {b_reg,16'b0};
-        for(i=0;i<16;i=i+1)begin
+        tmp_a = {16'b0, a_reg};
+        tmp_b = {b_reg, 16'b0};
+        for(i = 0;i < 16;i = i+1) begin
             tmp_a = tmp_a << 1;
             if (tmp_a >= tmp_b) begin
                 tmp_a = tmp_a - tmp_b + 1;

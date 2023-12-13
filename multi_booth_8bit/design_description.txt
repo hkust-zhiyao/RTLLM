@@ -1,0 +1,25 @@
+Please act as a professional verilog designer.
+
+Implement an 8-bit Radix-4 booth multiplier that performs the multiplication of two 8-bit inputs (a and b) using the Booth algorithm. It utilizes a clock signal (clk), and a reset signal (reset), and provides the product output (p) and a ready signal (rdy). The ready signal (rdy) is set to 1 to indicate the completion of the multiplication process.
+
+Module name:  
+   multi_booth_8bit  
+
+Input ports:
+   clk: Clock signal used for synchronous operation.
+   reset: Reset signal used to initialize the multiplier module.
+   a: 8-bit input representing the multiplicand.
+   b: 8-bit input representing the multiplier.
+
+Output ports:
+   p: 16-bit output representing the product of the multiplication.
+   rdy: Ready signal indicating the completion of the multiplication operation.
+
+Implementation:
+On the positive edge of the clock signal (clk) or the positive edge of the reset signal (reset), the module performs the multiplication process.
+If the reset signal (reset) is low, indicating normal operation, the module checks if the counter (ctr) is less than 16.
+If the counter (ctr) is less than 16, the multiplicand register (multiplicand) is left-shifted by 1 to simulate the Booth algorithm's shifting operation.
+If the current bit of the multiplier register (multiplier[ctr]) is 1, indicating a positive Booth encoding, the product register (p) accumulates the value of the multiplicand register (multiplicand).
+The counter (ctr) is incremented by 1. Once the counter (ctr) reaches 16, indicating the completion of the multiplication process, the ready signal (rdy) is set to 1.
+
+Give me the complete code.

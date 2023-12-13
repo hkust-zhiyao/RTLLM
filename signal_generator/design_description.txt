@@ -1,11 +1,29 @@
 Please act as a professional verilog designer.
 
-Implement a signal generator module, select the signal wave_choise according to the waveform to send out the corresponding waveform: wave_choice=0, send out the square wave signal; wave_choice=1, sends a sawtooth signal; wave_choice=2, the triangular wave signal is emitted. 
+Implement a Triangle Wave signal generator module that generates a waveform by incrementing and decrementing a 5-bit signal named "wave". The waveform cycles between 0 and 31, which is incremented or decremented by 1.
+
+
 Module name:  
-    signal_generator               
-Input ports：
-    input clk,
-	input rst_n,
-	input [1:0] wave_choise
-Output ports：
-    output reg [4:0]wave
+    signal_generator 
+                 
+Input ports:
+    clk: Clock signal used for synchronous operation.
+    rst_n: Active-low reset signal. Defined as 0 for reset and 1 for reset signal inactive.
+
+Output ports:
+    wave: 5-bit output waveform signal representing the generated waveform.
+
+Implementation:
+State and Waveform Generation:
+The module includes a register, state, used to control the state of the waveform generation.
+The module also includes a register, wave, with a width of 5 bits, which represents the generated waveform.
+The state and waveform registers are updated in the always block, triggered on the positive edge of the clock signal (posedge clk) or the negative edge of the reset signal (negedge rst_n).
+On reset, indicated by ~rst_n, the state register is cleared to 0, and the wave register is cleared to 0.
+The waveform generation is controlled using a case statement based on the current state:
+If the state is 0, the waveform (wave) is incremented by 1.
+If the waveform reaches 31 (wave == 31), the state is transitioned to 1.
+If the state is 1, the waveform is decremented by 1.
+If the waveform reaches 0 (wave == 0), the state is transitioned back to 0.
+The waveform generation continues to cycle between 0 and 31 based on the state transitions.
+
+Give me the complete code.

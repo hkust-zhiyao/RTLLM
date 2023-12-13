@@ -1,11 +1,18 @@
 Please act as a professional verilog designer.
 
-Implement a module of a counter design that requires counting from 4 'b0000 to 4' d12. The counting can be controlled by the input signal valid_count. That is, the count is paused if valid_count is invalid.
+Implement a module of a counter design that requires counting from 4 'b0000 to 4' d11. The counting can be controlled by the input signal valid_count. That is, the count is paused if valid_count is 0. The counter increments on each clock cycle when the valid_count signal is active and resets to 0 when the reset signal (rst_n) is active.
+
 Module name:  
     counter_12               
-Input ports：
-    input rst_n,
-	input clk,
-	input valid_count
-Output ports：
-    output [3:0] out
+Input ports:
+    rst_n: Reset signal (active low)
+    clk: Clock signal
+    valid_count: Signal to enable counting
+Output ports:
+    out: 4-bit output representing the current count value
+
+Implementation:
+If the reset signal is active (!rst_n), the counter is reset to 0 by assigning the value 4'b0000 to the output register (out). If the valid_count signal is 1, the counter increments. It checks if the current count value (out) is equal to 4'd11 (maximum count value). If it is, the counter wraps around and resets to 0 by assigning the value 4'b0000 to the output register (out). Otherwise, it increments the output register by 1. If the valid_count = 0, the counter will stop, and the output register (out) remains unchanged.
+
+Give me the complete code.
+

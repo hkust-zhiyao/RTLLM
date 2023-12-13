@@ -6,7 +6,7 @@ module testbench();
 	wire valid_out;
 	wire [15:0] data_out;
 
-verified_width_8to16 u0(
+width_8to16 dut(
 	.clk (clk),   
 	.rst_n(rst),
 	.valid_in(valid_in),
@@ -14,7 +14,7 @@ verified_width_8to16 u0(
 	.valid_out(valid_out),
 	.data_out(data_out)
 );
-	always #5 clk = ~clk;  // Create clock with period=10 
+	always #5 clk = ~clk;  
 
 integer error = 0;
 initial 
@@ -22,16 +22,20 @@ begin
 	rst=0;valid_in=0;
  	#10 rst=1;valid_in=1;data_in=8'b10100000;
 	// $display("data_out = %b", data_out);
-	error = (data_out == 16'b0000000000000000)? error : error+1; 
+	// $display("valid_out = %b", valid_out);
+	error = valid_out ==0 ? error : error+1; 
 	#10 data_in=8'b10100001; 
+	// $display("data_out = %b", data_out); 
 	#10 data_in=8'b10110000;
 	// $display("data_out = %b", data_out); 
-	error = (data_out == 16'b1010000010100001)? error : error+1;
+	// $display("valid_out = %b", valid_out);
+	error = (data_out == 16'b1010000010100001 && valid_out ==1 )? error : error+1;
 	#10 valid_in=0;
 	#20 valid_in=1;data_in=8'b10110001; 
 	#10 valid_in=0;
 	// $display("data_out = %b", data_out); 
-	error = (data_out == 16'b1011000010110001)? error : error+1;
+	// $display("valid_out = %b", valid_out);
+	error = (data_out == 16'b1011000010110001 && valid_out ==1 )? error : error+1;
 	#30
 
 	if (error == 0) begin

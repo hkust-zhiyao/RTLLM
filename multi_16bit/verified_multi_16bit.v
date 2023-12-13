@@ -1,21 +1,13 @@
 module verified_multi_16bit(
-    clk, 
-    rst_n,
-    start, 
-    ain, 
-    bin, 
-    yout, 
-    done
+    input clk,          // Chip clock signal.
+    input rst_n,        // Active-low reset signal. Defined as 0 for chip reset; defined as 1 for reset signal inactive.
+    input start,        // Chip enable signal. 
+    input [15:0] ain,   // Input a (multiplicand) with a data width of 16 bits.
+    input [15:0] bin,   // Input b (multiplier) with a data width of 16 bits.
+
+    output [31:0] yout, // Product output with a data width of 32 bits.
+    output done         // Chip output flag signal. Defined as 1 indicates multiplication operation completion.
 );
-
-input clk;        // Chip clock signal.
-input rst_n;      // Active-low reset signal. Defined as 0 for chip reset; defined as 1 for reset signal inactive.
-input start;      // Chip enable signal. 
-input [15:0] ain; // Input a (multiplicand) with a data width of 16 bits.
-input [15:0] bin; // Input b (multiplier) with a data width of 16 bits.
-
-output [31:0] yout; // Product output with a data width of 32 bits.
-output done;      // Chip output flag signal. Defined as 1 indicates multiplication operation completion.
 
 reg [15:0] areg;    // Multiplicand a register.
 reg [15:0] breg;    // Multiplier b register.

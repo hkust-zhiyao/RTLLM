@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_multi_pipe
+TEST_DESIGN = multi_pipe
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

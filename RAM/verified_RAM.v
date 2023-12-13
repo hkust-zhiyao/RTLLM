@@ -10,18 +10,15 @@ module verified_RAM (
 	input [7:0]read_addr,
 	output reg [5:0]read_data
 );
-    //prameter 
-    parameter WIDTH = 6;
-    parameter DEPTH = 8;
     
     //defination
-    reg [DEPTH - 1 : 0] RAM [2**WIDTH-1:0];
+    reg [7 : 0] RAM [11:0];
 
     //output 
     integer i;
     always@(posedge clk or negedge rst_n)begin
         if(!rst_n) begin
-               for(i = 0; i < DEPTH; i = i + 1) begin
+               for(i = 0; i < 8; i = i + 1) begin
                    RAM[i] <= 'd0;
                end
         end

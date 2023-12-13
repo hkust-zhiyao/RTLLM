@@ -1,9 +1,9 @@
 `timescale 1ns/1ns
 module verified_parallel2serial(
 	input wire clk  ,
-	input wire rst  ,
+	input wire rst_n  ,
 	input wire [3:0]d ,
-	output wire valid_in ,
+	output wire valid_out ,
 	output wire dout
 	);
 
@@ -12,9 +12,9 @@ reg [3:0] data = 'd0;
 reg [1:0]cnt;
 reg valid;
 assign dout = data[3];
-assign valid_in =valid;
-always @(posedge clk or negedge rst) begin
-    if(!rst)begin
+assign valid_out =valid;
+always @(posedge clk or negedge rst_n) begin
+    if(!rst_n)begin
         data<= 'd0;
         cnt <= 'd0;
         valid <= 'd0;

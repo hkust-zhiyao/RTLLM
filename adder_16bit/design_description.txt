@@ -1,12 +1,18 @@
 Please act as a professional verilog designer.
 
-Implement a module of a 16-bit full adder.
+Implement a module of a 16-bit full adder in combinational logic.
+
 Module name:  
     adder_16bit               
-Input ports：
-    input    [15:0]  a,
-    input    [15:0]  b,
-    input            c_up
-Output ports：
-    output    [15:0]  y,
-    output            Co
+Input ports:
+    a[15:0]: 16-bit input operand A.
+    b[15:0]: 16-bit input operand B.
+    Cin: Carry-in input.
+Output ports:
+    y[15:0]: 16-bit output representing the sum of A and B.
+    Co: Carry-out output.
+
+Implementation:
+In the adder_16bit module, you need to design a small bit-width adder(8-bit adder), which will be instantiated multiple times.
+
+Give me the complete code.

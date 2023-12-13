@@ -13,7 +13,7 @@ module test_alu();
     wire flag;
     reg[4:0]cnt;
     
-    verified_alu alu(a,b,aluc,r,zero,carry,negative,overflow,flag);
+    alu uut(a,b,aluc,r,zero,carry,negative,overflow,flag);
 
     parameter ADD = 6'b100000;
     parameter ADDU = 6'b100001;
@@ -64,22 +64,16 @@ module test_alu();
     b=32'h00000021;
     #5;
 
-    //file_open = $fopen("reference.dat","w");
-    //$fclose(file_open);
     cnt = 0;
 
-    //file_open = $fopen("reference.dat", "a");
     
     for(cnt=0;cnt<17;cnt=cnt+1)
-    begin
-    #5;
-	aluc=opcodes[cnt];
-    #5;
+        begin
+        #5;
+        aluc=opcodes[cnt];
+        #5;
         error=error|(reference[cnt]!=r);
-        //$fdisplay(file_open,"%h", r);
     end
-
-    //$fclose(file_open);
 
 	if(error==0)
 	begin
@@ -89,5 +83,6 @@ module test_alu();
 	begin
 		$display("===========Error===========");
 	end
+    $finish;
     end
 endmodule

@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_right_shifter
+TEST_DESIGN = right_shifter
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

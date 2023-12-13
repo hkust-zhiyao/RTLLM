@@ -1,15 +1,21 @@
 Please act as a professional verilog designer.
 
-Implement a module to achieve serial input data accumulation output, input input 8bit data, whenever the module receives 4 input data, the output outputs 4 received data accumulation results. The input and output interfaces interact with the upstream and downstream using the valid-ready two-way handshake mechanism. When both upstream and downstream are required to be able to transmit at full speed, there is no bubble in data transmission, and no additional performance loss can be caused due to the design of this module.
+Implement a module to achieve serial input data accumulation output, input is 8bit data. The valid_in will be set to 1 before the first data comes in. Whenever the module receives 4 input data, the data_out outputs 4 received data accumulation results and sets the valid_out to be 1 (will last only 1 cycle).
+
 Module name:  
     accu               
-Input ports：
-    input 				clk 		,   
-	input 				rst_n		,
-	input		[7:0]	data_in		,
-	input				valid_a		,
-	input	 			ready_b		,        
-Output ports：
-    output		 		ready_a		,
- 	output	reg			valid_b		,
-	output  reg [9:0] 	data_out
+Input ports:
+	clk: Clock input for synchronization.
+	rst_n: Active-low reset signal.
+	data_in[7:0]: 8-bit input data for addition.
+	valid_in: Input signal indicating readiness for new data.   
+Output ports:
+    valid_out: Output signal indicating when 4 input data accumulation is reached.
+	data_out[9:0]: 10-bit output data representing the accumulated sum.
+
+Implementation:
+When valid_in is 1, data_in is a valid input. Accumulate four valid input data_in values and calculate the output data_out by adding these four values together. 
+There is no output when there are fewer than four data_in inputs in the interim. Along with the output data_out, a cycle of valid_out=1 will appear as a signal. 
+The valid_out signal is set to 1 when the data_out outputs 4 received data accumulation results. Otherwise, it is set to 0.
+
+Give me the complete code.

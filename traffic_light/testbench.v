@@ -1,6 +1,6 @@
 `timescale 1ns/1ns
 
-module tb_verified_traffic_light;
+module tb_traffic_light;
   
   reg clk;
   reg rst_n;
@@ -11,7 +11,7 @@ module tb_verified_traffic_light;
   wire green;
   integer i;
   // Instantiate the module
-  verified_traffic_light uut (
+  traffic_light uut (
     .clk(clk), 
     .rst_n(rst_n),
     .pass_request(pass_request), 

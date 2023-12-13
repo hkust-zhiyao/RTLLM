@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_edge_detect
+TEST_DESIGN = edge_detect
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

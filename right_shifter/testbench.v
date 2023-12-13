@@ -1,11 +1,11 @@
 `timescale 1ns/1ns
-module verified_right_shifter_tb;
+module right_shifter_tb;
   reg clk;
   reg d;
   wire [7:0] q;
 
   // Instantiate the DUT (Design Under Test)
-  verified_right_shifter dut (
+  right_shifter dut (
     .clk(clk),
     .d(d),
     .q(q)

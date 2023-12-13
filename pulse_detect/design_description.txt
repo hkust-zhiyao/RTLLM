@@ -1,12 +1,23 @@
 Please act as a professional verilog designer.
 
-Implement the design where a single clock-cycle width pulse(data_in) is extracted from the A clock(fast) domain and a new single clock-width pulse (data_out) will be created in the clock domain B(slow). The frequency of clock domain A is 10 times that of clock domain B.
+Implement a module for pulse detection. The 1-bit input signal data_in is a continuous input, which is triggered by clk. When "data_in" changes from 0 to 1 to 0(3 cycles), this is considered as a "pulse". The indicating signal dataout is 1 at the end cycle of the "pulse", and then returns to 0 until the corresponding pulse appears again. For example, if data_in is 01010(5 cycles), the data_out is 00101.
+
+
 Module name:  
-    pulse_detect               
+    pulse_detect
+
 Input ports：
-    input                 clk_fast    , 
-    input                 clk_slow    ,   
-    input                 rst_n        ,
-    input                 data_in	
+    clk: Clock signal.
+    rst_n: Reset signal (active low).
+    data_in: One-bit input signal.
+
 Output ports：
-     output               dataout
+    data_out: Output signal indicating the presence of pulses.
+
+Implementation:
+Declare the module pulse_detect with input and output ports as specified in the ports statement.
+Declare a register state to keep track of the current state of the pulse detection process.
+Inside an always block, sensitive to the positive edge of the clk signal and the negative edge of the rst_n signal, implement the logic for pulse detection and output generation.
+In the reset condition (~rst_n), set the state register to the initial state and set the data_out output to 0, indicating no pulse. Continue the detection process for the remaining states. For each state, check the value of data_in and transition to the next state accordingly. If the current state satisfies the last state of a "pulse", set data_out to 1, indicating the end of a pulse. Otherwise, set data_out to 0.
+
+Give me the complete code.

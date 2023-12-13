@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_fsm
+TEST_DESIGN = fsm
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

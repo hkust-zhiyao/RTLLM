@@ -1,0 +1,11 @@
+./simv -l run.log
+Chronologic VCS simulator copyright 1991-2022
+Contains Synopsys proprietary information.
+Compiler version T-2022.06_Full64; Runtime version T-2022.06_Full64;  Dec 12 18:21 2023
+===========Your Design Passed===========
+$finish called from file "testbench.v", line 74.
+$finish at simulation time                 1005
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1005 ns
+CPU Time:      0.300 seconds;       Data structure size:   0.0Mb
+Tue Dec 12 18:21:58 2023

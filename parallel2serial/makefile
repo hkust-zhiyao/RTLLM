@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_parallel2serial
+TEST_DESIGN = parallel2serial
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

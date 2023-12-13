@@ -1,12 +1,22 @@
 Please act as a professional verilog designer.
 
-Implement a module for parallel-to-serial conversion, where every four input bits are converted to one output bit. The output signal valid_in indicates the validity of the input at that time. 
+Implement a module for parallel-to-serial conversion, where every four input bits are converted to a serial one bit output (from MSB to LSB). The output signal valid_out is set to 1 to indicate the availability of valid serial output. When valid_out = 1, the most significant bit of d is output, and the remaining three bits are output sequentially in the following 3 cycles.
+
 Module name:  
-    p_to_s               
-Input ports：
-    input  clk  ,
-	input  rst  ,
-	input  [3:0]d 
-Output ports：
-    output  valid_in ,
-	output  dout
+    parallel2serial     
+
+Input ports:
+    clk: Clock signal used for synchronous operations.
+    rst_n: Reset signal. Defined as 0 for reset and 1 for reset signal inactive.
+    d: 4-bit parallel data input.
+
+Output ports:
+    valid_out: Valid signal indicating the availability of serial output.
+    dout: Serial output representing the converted data.
+
+Implementation:
+The most significant bit of the parallel input is assigned to the serial output (dout). On each clock cycle, if the counter (cnt) is 3, indicating the last bit of the parallel input, the module updates the data register (data) with the parallel input (d), resets the counter (cnt) to 0, and sets the valid signal (valid) to 1.
+Otherwise, the module increments the counter (cnt) by 1, sets the valid signal (valid) to 0, and shifts the data register (data) one bit to the left, with the most significant bit shifted to the least significant bit.
+Counter Register: If the reset signal (rst_n) is high, the register (cnt) is incremented by 1.
+
+Give me the complete code.

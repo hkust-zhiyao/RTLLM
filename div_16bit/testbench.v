@@ -17,7 +17,7 @@ initial begin
       B = $urandom_range(1'b1, 8'b1111_1111);
       expected_result = A/B;
       expected_odd = A%B;
-      #100; 
+      #10; 
       error = (expected_odd != odd || expected_result != result) ? error+1 : error;
       // $display("A = %d, B = %d, Result = %d, odd = %d", A, B, result, odd);
    end
@@ -32,6 +32,6 @@ initial begin
     $finish;
 end
 
-verified_div_16bit uut (.A(A), .B(B), .result(result), .odd(odd));
+div_16bit uut (.A(A), .B(B), .result(result), .odd(odd));
 
 endmodule

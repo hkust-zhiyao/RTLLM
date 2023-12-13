@@ -1,68 +1,66 @@
 `timescale 1ns/1ns
 
-module verified_parallel2serial_tb;
+module parallel2serial_tb;
   reg clk;
-  reg rst;
+  reg rst_n;
   reg [3:0] d;
-  wire valid_in;
+  wire valid_out;
   wire dout;
 
   // Instantiate the DUT (Design Under Test)
-  verified_parallel2serial dut (
+  parallel2serial dut (
     .clk(clk),
-    .rst(rst),
+    .rst_n(rst_n),
     .d(d),
-    .valid_in(valid_in),
+    .valid_out(valid_out),
     .dout(dout)
   );
 
   // Generate clock
   always #5 clk = ~clk;
   integer error = 0;
+  integer failcase = 0;
+  integer i = 0;
   initial begin
-    // Initialize inputs
-    clk = 0;
-    rst = 0;
-    d = 4'b0;
+    for (i=0; i<100; i=i+1) begin
+        error = 0;
+        // Initialize inputs
+        clk = 0;
+        rst_n = 0;
+        d = 4'b0;
 
-    // Wait for a few clock cycles for reset to settle
-    #10;
+        #10;
+        rst_n = 1;
+        #10;
+        d = $random;
+        while (valid_out == 0) begin
+            @(posedge clk); // Wait for one clock cycle
+        end
+        // $display("dout = %b, valid_out = %b", dout, valid_out);
+        error = (dout == d[3] && valid_out==1) ? error : error+1;
+        #10;
+        // $display("dout = %b, valid_out = %b", dout, valid_out);
+        error = (dout == d[2] && valid_out==0) ? error : error+1;
+        #10;
+        // $display("dout = %b, valid_out = %b", dout, valid_out);
+        error = (dout == d[1] && valid_out==0) ? error : error+1;
+        #10;
+        // $display("dout = %b, valid_out = %b", dout, valid_out);
+        error = (dout == d[0] && valid_out==0) ? error : error+1;
+        #10;
+        // $display("dout = %b, valid_out = %b", dout, valid_out);
+        error = (valid_out==1) ? error : error+1;
+        #10;
+        failcase = (error==0)? failcase :failcase+1;
 
-    // Apply reset
-    rst = 1;
-
-    // Perform test case
-    #10;
-    d = 4'b1010;
-    #10;
-    d = 4'b1100;
-    #10;
-    d = 4'b0110;
-    #10;
-
-    // Check the output
-    // $display("dout = %b, valid_in = %b", dout, valid_in);
-    error = (dout == 0 && valid_in==1) ? error : error+1;
-    #10;
-    // $display("dout = %b, valid_in = %b", dout, valid_in);
-    error = (dout == 1 && valid_in==0) ? error : error+1;
-     #10;
-    // $display("dout = %b, valid_in = %b", dout, valid_in);
-    error = (dout == 1 && valid_in==0) ? error : error+1;
-     #10;
-    // $display("dout = %b, valid_in = %b", dout, valid_in);
-    error = (dout == 0 && valid_in==0) ? error : error+1;
-     #10;
-    // $display("dout = %b, valid_in = %b", dout, valid_in);
-    error = (dout == 0 && valid_in==1) ? error : error+1;
-
-    if(error<=2) begin
+    end
+    if(failcase==0) begin
       $display("===========Your Design Passed===========");
     end
     else begin
-      $display("===========Failed===========");
+      $display("===========Test completed with %d /100 failures===========", failcase);
     end
-    $finish; // End the simulation
+    $finish; 
   end
 
 endmodule

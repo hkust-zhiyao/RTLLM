@@ -1,4 +1,4 @@
-module tb_verified_multi_16bit;
+module tb_multi_16bit;
   
   reg clk;
   reg rst_n;
@@ -9,12 +9,12 @@ module tb_verified_multi_16bit;
   wire done;
 
   integer i; // Declare the loop variable here
-  integer fail_count; // Declare a variable to count the failures
+  integer fail_count = 0; // Declare a variable to count the failures
   integer timeout; // Declare a timeout counter here
   reg [31:0] expected_product; // Declare a variable to store the expected product
 
   // Instantiate the module
-  verified_multi_16bit uut (
+  multi_16bit uut (
     .clk(clk), 
     .rst_n(rst_n),
     .start(start),
@@ -32,53 +32,44 @@ module tb_verified_multi_16bit;
   // Randomize inputs and check output
   initial begin
     clk = 0; // Initialize clock
-    fail_count = 0;
     rst_n = 1; // De-assert reset
     start = 0; // Initialize start
 
     // Perform reset
     rst_n = 0;
-    #10;
-    rst_n = 1;
-    #10;
-
     for (i = 0; i < 100; i = i + 1) begin
+      #100;
+      rst_n = 1;
+      #50;
       ain = $random;
       bin = $random;
+      #50;
       start = 1; // Start the operation
-      
-      #10; // Wait for the output to be computed
-      
-      // Calculate expected product
+      while(done !== 1) begin
+        #10;
+      end
       expected_product = ain * bin;
       
-      // We need to wait until the operation is done
-      timeout = 0; // Initialize timeout counter
-      while(!done && timeout < 1000) begin // Check for timeout
-        #10;
-        timeout = timeout + 1;
+      if (done == 1) begin
+        fail_count = (yout == expected_product)? fail_count:fail_count+1;
       end
-      
-      // Check for timeout
-      if (timeout >= 1000) begin
-        $display("Timeout: operation did not complete within 1000 clock cycles");
-        fail_count = fail_count + 1; // Increment the failure count
-        start = 0; // Stop the operation
-        $finish; // Skip to the next iteration
-      end
-      
-      if (yout !== expected_product) begin
-        $display("Test failed: ain = %h, bin = %h, yout = %h, expected = %h", ain, bin, yout, expected_product);
-        fail_count = fail_count + 1; // Increment the failure count
-      end
-      else begin
-        $display("===========Your Design Passed===========");
-      end
-      
       start = 0; // Stop the operation
+      rst_n = 0;
+      #100;
     end
     
-    $display("Test completed with %d failures", fail_count);
+    if (fail_count == 0) begin
+        $display("===========Your Design Passed===========");
+    end
+    else begin
+    $display("===========Test completed with %d / 100 failures===========", fail_count);
+    end
+    $finish;
+  end
+
+  initial begin
+    #50000;
+    $finish;
   end
 
 endmodule

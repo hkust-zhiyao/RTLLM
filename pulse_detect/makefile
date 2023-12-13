@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_pulse_detect
+TEST_DESIGN = pulse_detect
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

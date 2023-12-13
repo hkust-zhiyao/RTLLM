@@ -1,17 +1,23 @@
 ```
-  _____    _______   _        _        __  __ 
- |  __ \  |__   __| | |      | |      |  \/  |
- | |__) |    | |    | |      | |      | \  / |
- |  _  /     | |    | |      | |      | |\/| |
- | | \ \     | |    | |____  | |____  | |  | |
- |_|  \_\    |_|    |______| |______| |_|  |_|
+
+  _____    _______   _        _        __  __        __      __  __       __ 
+ |  __ \  |__   __| | |      | |      |  \/  |       \ \    / / /_ |     /_ |
+ | |__) |    | |    | |      | |      | \  / |        \ \  / /   | |      | |
+ |  _  /     | |    | |      | |      | |\/| |         \ \/ /    | |      | |
+ | | \ \     | |    | |____  | |____  | |  | |          \  /     | |  _   | |
+ |_|  \_\    |_|    |______| |______| |_|  |_|           \/      |_| (_)  |_|
+                                                                             
+                                                                             
                                               
 ```
 **Version 1.1** 
 
-We will be releasing v1.1 within 2-3 weeks, which fixes some errors found in v1.0 and includes additional test cases. 
+We have released RTLLM v1.1 already, which fixes some errors found in **[v1.0](https://github.com/hkust-zhiyao/RTLLM/tree/v1.0)**.
+1. Update the ```design_description.txt ``` to better guide LLM in generating RTL code.
+2. Provide a more comprehensive ```testbench.v``` to improve the accuracy of the test.
+3. Update a more practical testing script ```auto_run.py``` .
 
---25 Nov. 2023
+--12 Dec. 2023
 
 # RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
 
@@ -20,7 +26,7 @@ Yao Lu, Shang Liu, Qijun Zhang, and Zhiyao Xie, "RTLLM: An Open-Source Benchmark
  
 ## 1. Documents
 
-RTL Generation with Large Language Model Benchmark for generating design RTL with natural language (under construction). This repository contains a total of 30 designs. Each design has its own folder, which includes several files:
+RTL Generation with Large Language Model Benchmark for generating design RTL with natural language (under construction). This repository contains a total of 29 designs. Each design has its own folder, which includes several files:
 
 1. Design Description (**design_description.txt**):
     
@@ -84,7 +90,8 @@ make clean
 
 - In stage 3, the generated design RTL 𝒱 is synthesized into a netlist to analyze the design qualities regarding PPA values. They will be compared with the design qualities of the provided reference designs 𝒱ₕ.
   
-<img src="https://github.com/hkust-zhiyao/RTLLM/blob/main/_pic/bench.png" width="700px">
+<img src="_pic/bench.png" width="700px">
+
 Fig.1: The workflow of adopting RTLLM for completely automated design RTL generation and evaluation. The user only needs to provide their LLM as input. It evaluates whether each generated design satisfies the syntax goal, functionality goal, and quality goal.
 
 ---
@@ -100,7 +107,8 @@ Fig.1: The workflow of adopting RTLLM for completely automated design RTL genera
 - Syntax Correctness: Number of generated design RTLs 𝒱 with correct syntax, out of the five trials.
 - Functionality Correctness: A success ✅ as long as there is one generated RTL successfully passing the testbench 𝒯, out of the ones already with correct syntax.
   
-<img src="https://github.com/hkust-zhiyao/RTLLM/blob/main/_pic/update_Syntax_and_Functionality_Verification.png" width="800px">
+<img src="_pic/update_Syntax_and_Functionality_Verification.png" width="800px">
+
 Fig.2: The Syntax and Functionality Correctness Verification for Different LLMs
  
 ---
@@ -109,5 +117,6 @@ Fig.2: The Syntax and Functionality Correctness Verification for Different LLMs
 
 [^3]: The worst LLM StarCoder is not presented due to space limitations.
 
-<img src="https://github.com/hkust-zhiyao/RTLLM/blob/main/_pic/DC_Results.png" width="800px">
+<img src="_pic/DC_Results.png" width="800px">
+
 Fig.3: The Design Qualities of Gate-Level Netlist, Synthesized with Design Compiler.

@@ -1,6 +1,6 @@
 .PHONY: vcs sim clean
 
-TEST_DESIGN = verified_pe
+TEST_DESIGN = pe
 
 vcs:
 		vcs -sverilog +v2k -timescale=1ns/1ns       \

@@ -1,19 +1,61 @@
 Please act as a professional verilog designer.
 
-Implement an asynchronous FIFO, FIFO bit width and depth can be configured(parameter DEPTH = 16,parameter WIDTH = 8). The asynchronous FIFO structure is divided into several parts. The first part is dual-port RAM, which is used for data storage. Instantiate dual-port RAM as a submodule, The RAM ports are input wclk,input wenc,input [$clog2(DEPTH)-1:0] waddr,input [WIDTH-1:0] wdata,input rclk,input renc,input [$clog2(DEPTH)-1:0] raddr,output reg [WIDTH-1:0] rdata. The second part is the data write controller. The third part is the data read controller. The fourth part is the read pointer synchronizer. The read pointer is collected using the two-stage trigger of the write clock and output to the data write controller. The fifth part is the write pointer synchronizer, which uses the two-stage trigger of the read clock to collect the write pointer and output it to the data read controller.
-The method of empty and full judgment is to generate empty and full signal by comparing Gray code. Use 4-bit Gray code as a read/write pointer for a FIFO with depth 8. The gray code is converted to a four-digit binary number, using the lower three digits of the binary number as the address to access RAM. When the read and write Pointers are equal, the FIFO is null.
+Implement an asynchronous FIFO, FIFO bit width and depth can be configured(parameter DEPTH = 16, parameter WIDTH = 8). The asynchronous FIFO structure is divided into several parts. The first part is dual-port RAM, which is used for data storage. Instantiate dual-port RAM as a submodule, The RAM ports are input wclk, input wenc, input [$clog2(DEPTH)-1:0] waddr, input [WIDTH-1:0] wdata, input rclk, input renc, input [$clog2(DEPTH)-1:0] raddr, output reg [WIDTH-1:0] rdata. The second part is the data write controller. The third part is the data read controller. The fourth part is the read pointer synchronizer. The read pointer is collected using the two-stage trigger of the write clock and output to the data write controller. The fifth part is the write pointer synchronizer, which uses the two-stage trigger of the read clock to collect the write pointer and output it to the data read controller.
+The method of empty and full judgment is to generate empty and full signals by comparing the Gray code. Use 4-bit Gray code as a read/write pointer for a FIFO with depth 8. The gray code is converted to a four-digit binary number, using the lower three digits of the binary number as the address to access RAM. When the read and write Pointers are equal, the FIFO is null.
 When the write pointer has one more cycle RAM than the read pointer, the highest and second-highest bits of the read and write pointer are opposite, the remaining bits are the same, and the FIFO is full.
+
 Module name:  
-    asyn_fifo               
-Input ports：
-    input 					wclk	, 
-	input 					rclk	,   
-	input 					wrstn	,
-	input					rrstn	,
-	input 					winc	,
-	input 			 		rinc	,
-	input 		[WIDTH-1:0]	wdata	
-Output ports：
-    output wire				wfull	,
-	output wire				rempty	,
-	output wire [WIDTH-1:0]	rdata
+    asyn_fifo  
+
+Input ports:
+	wclk: Write clock signal used for synchronous write operations.
+	rclk: Read clock signal used for synchronous read operations.
+	wrstn: Write reset signal. Defined as 0 for reset and 1 for reset signal inactive.
+	rrstn: Read reset signal. Defined as 0 for reset and 1 for reset signal inactive.
+	winc: Write increment signal. Used to trigger write operations.
+	rinc: Read increment signal. Used to trigger read operations.
+	wdata: Write data input. The width [WIDTH-1:0] is configurable and represents the data to be written into the FIFO.
+
+Output ports:
+wfull: Write full signal. Indicates if the FIFO is full and cannot accept further write operations.
+rempty: Read empty signal. Indicates if the FIFO is empty and cannot provide any data for read operations.
+rdata: Read data output. The width [WIDTH-1:0] is configurable and represents the data read from the FIFO.
+
+Parameter:
+	WIDTH = 8
+	DEPTH = 16
+
+Implementation:
+The module implements an asynchronous FIFO using a dual-port RAM module and additional logic for managing read and write pointers.
+Dual-port RAM:
+The module instantiates a dual-port RAM module named "dual_port_RAM" with configurable depth and width.
+The RAM module has separate clock inputs for write (wclk) and read (rclk) operations.
+The RAM module has separate address inputs for write (waddr) and read (raddr) operations.
+The RAM module has a write enable input (wenc) and a write data input (wdata).
+The RAM module has a read enable input (renc) and a read data output (rdata).
+The RAM module stores data in a two-dimensional array, RAM_MEM, with a size of DEPTH by WIDTH.
+Write and Read Pointers:
+The module includes logic to manage write and read pointers for asynchronous operation.
+The write and read pointers are represented by binary registers, waddr_bin and raddr_bin, respectively.
+The write and read pointers are incremented based on the write and read increment signals (winc and rinc), respectively.
+The write pointer is incremented on the positive edge of the write clock (posedge wclk) and reset to 0 on write reset (~wrstn).
+The read pointer is incremented on the positive edge of the read clock (posedge rclk) and reset to 0 on read reset (~rrstn).
+Gray Code Conversion:
+The write and read pointers are converted to Gray code using XOR operations with right-shifted values.
+The converted write and read pointers are stored in registers wptr and rptr, respectively.
+The Gray code conversion reduces glitches and ensures proper synchronization of the write and read pointers.
+Pointer Buffers:
+The module includes buffer registers (wptr_buff and rptr_buff) to hold the previous values of the write and read pointers.
+The buffer registers are updated on the positive edge of the respective clocks and reset to 0 on the respective resets (~wrstn and ~rrstn).
+The buffer registers are used to synchronize the write and read pointers for determining the full and empty conditions.
+Full and Empty Signals:
+The module compares the current write and read pointers (wptr and rptr_syn) to determine if the FIFO is full or empty.
+The wfull output is set to 1 when the write pointer is equal to the bitwise negation of the most significant bit of the read pointer concatenated with the remaining bits of the read pointer.
+The rempty output is set to 1 when the read pointer is equal to the write pointer.
+Input and Output Connections:
+The module connects the input and output signals to the dual-port RAM module based on the control signals and pointer values.
+The wen and ren signals control the write and read enable signals of the RAM module, respectively.
+The wdata input is connected to the write data input (wdata) of the RAM module.
+The rdata output is connected to the read data output (rdata) of the RAM module.
+
+Give me the complete code.

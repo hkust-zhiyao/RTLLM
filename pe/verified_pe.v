@@ -14,12 +14,12 @@ begin
 
   if(rst)
   begin
-    c<=0;
+    c <= 0;
   end
 
   else
   begin
-    c<=c+a*b;
+    c <= c + a*b;
   end
 
 end

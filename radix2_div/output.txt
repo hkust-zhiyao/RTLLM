@@ -1,0 +1,26 @@
+./simv -l run.log
+Chronologic VCS simulator copyright 1991-2022
+Contains Synopsys proprietary information.
+Compiler version T-2022.06_Full64; Runtime version T-2022.06_Full64;  Dec 12 18:19 2023
+Fatal: "testbench.v", 64: radix2_div_tb: at time 106000 ps
+Error: Testbench exceeded time limit of 100000 seconds
+$finish called from file "testbench.v", line 64.
+$finish at simulation time               106000
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 106000 ps
+CPU Time:      0.280 seconds;       Data structure size:   0.0Mb
+Tue Dec 12 18:19:22 2023
+
+Error-[DEBUG-INIT-FAIL] Debug initialization failed
+  Debug initialization has failed due to cannot open db lookup file:
+  	'/local/home/coguest/luyao/SmallDesigns/_TEST/radix2_div/./simv.daidir/debug_dump/modfilename.db'
+  	Possible causes are:
+  	The file or directory may have been deleted, or
+  	PLI routines are used but the design was not compiled with debug 
+  capability.
+  
+
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 10000 ps
+CPU Time:    709.730 seconds;       Data structure size:   0.0Mb
+Tue Dec 12 18:28:18 2023

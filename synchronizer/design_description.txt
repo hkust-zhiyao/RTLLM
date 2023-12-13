@@ -1,0 +1,34 @@
+Please act as a professional verilog designer.
+
+Implement a multi-bit MUX-based synchronizer, data_in will remain constant during the period when data_en is high, and data_en is high for at least 3 clk_b clock cycles. When the value of data_en is high, data can be synchronized. The data change frequency of data_in is very low. The change interval between two adjacent data is at least 10 clk_b clock cycles.
+The clock clk_a is responsible for: input data_in is refer to clock a. enable signal data_en is refer to clock a.
+The clock clk_b is responsible for the enable signal data_en delays two cycles, that is, two D flip-flops. This is done with reference to clock b. And the data is finally output dataout, and the output refers to clock b.
+
+Module name:  
+    synchronizer  
+
+Input ports:
+	clk_a: Clock signal A used for synchronous operations.
+	clk_b: Clock signal B used for synchronous operations.
+	arstn: Active-low reset signal A. Defined as 0 for reset and 1 for reset signal inactive.
+	brstn: Active-low reset signal B. Defined as 0 for reset and 1 for reset signal inactive.
+	data_in: Input data signal of size 4 bits.
+	data_en: Input enable signal that controls the selection operation.
+
+Output ports:
+    dataout: Output data signal of size 4 bits.
+
+Implementation:
+Data Register:
+The module includes a register, data_reg, to store the input data signal, data_in.
+On the positive edge of clock signal A (clk_a) or the falling edge of reset signal A (arstn), the module updates the register. If the reset signal A (arstn) is low, indicating a reset condition, the register (data_reg) is set to 0. If the reset signal A (arstn) is high, the register (data_reg) is updated with the input data signal (data_in).
+Enable Data Register:
+The module includes a register, en_data_reg, to store the input enable signal, data_en.
+On the positive edge of clock signal A (clk_a) or the falling edge of reset signal A (arstn), the module updates the register. If the reset signal A (arstn) is low, the register (en_data_reg) is set to 0. If the reset signal A (arstn) is high, the register (en_data_reg) is updated with the input enable signal (data_en).
+Enable Control Registers:
+The module includes two registers, en_clap_one and en_clap_two, to control the selection of the input data. On the positive edge of clock signal B (clk_b) or the falling edge of reset signal B (brstn), the module updates the registers. If the reset signal B (brstn) is low, indicating a reset condition, both registers (en_clap_one and en_clap_two) are set to 0.
+If the reset signal B (brstn) is high, the registers (en_clap_one and en_clap_two) are updated based on the value of en_data_reg. The register en_clap_one is assigned the value of en_data_reg, and en_clap_two is assigned the previous value of en_clap_one.
+Output Assignment:
+On the positive edge of clock signal B (clk_b) or the falling edge of reset signal B (brstn), the module assigns the output data value. If the reset signal B (brstn) is low, indicating a reset condition, the output data (dataout) is set to 0. If the reset signal B (brstn) is high and the control signal (en_clap_two) is active, the output data (dataout) is assigned the value of the data register (data_reg). If the control signal (en_clap_two) is inactive, the output data (dataout) retains its previous value.
+
+Give me the complete code.
