@@ -17,13 +17,15 @@ We have released RTLLM v1.1 already, which fixes some errors found in **[v1.0](h
 2. Provide a more comprehensive ```testbench.v``` to improve the accuracy of the test.
 3. Update a more practical testing script ```auto_run.py``` .
 
---12 Dec. 2023
+--13 Dec. 2023
 
 # RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
 
 
 Yao Lu, Shang Liu, Qijun Zhang, and Zhiyao Xie, "RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model," Asia and South Pacific Design Automation Conference (ASP-DAC) 2024.[[paper]](https://arxiv.org/pdf/2308.05345.pdf)
- 
+
+_**Note**: In our paper, the results are obtained based on RTLLM V1.0._
+
 ## 1. Documents
 
 RTL Generation with Large Language Model Benchmark for generating design RTL with natural language (under construction). This repository contains a total of 29 designs. Each design has its own folder, which includes several files:
