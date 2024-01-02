@@ -11,4 +11,4 @@ sim:
 		./simv -l run.log
 
 clean:
-		rm -rf *.log  csrc  simv*  *.key *.vpd  DVEfiles coverage *.vdb
+		rm -rf *.log  csrc  simv*  *.key *.vpd  DVEfiles coverage *.vdb output.txt
