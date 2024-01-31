@@ -7,19 +7,20 @@ module verified_pe(
     output [31:0] c
 );
 
-reg [31:0] c;
+reg [31:0] cc;
+assign c = cc;
 
 always@(posedge clk or posedge rst)
 begin
 
   if(rst)
   begin
-    c <= 0;
+    cc <= 0;
   end
 
   else
   begin
-    c <= c + a*b;
+    cc <= cc + a*b;
   end
 
 end
