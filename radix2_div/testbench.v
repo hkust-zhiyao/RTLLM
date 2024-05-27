@@ -11,7 +11,7 @@ module radix2_div_tb;
     wire [15:0] result;
 
     // Instantiate the radix2_div module
-    verified_radix2_div uut (
+    radix2_div uut (
         .clk(clk),
         .rst(rst),
         .dividend(dividend),
