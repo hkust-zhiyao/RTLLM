@@ -1,96 +1,83 @@
 `timescale 1ns/1ps
+module verified_radix2_div(
+    input wire clk,
+    input wire rst,
+    input wire [7:0] dividend,    
+    input wire [7:0] divisor,    
+    input wire sign,       
 
-module verified_radix2_div 
-#(
-parameter DATAWIDTH=8
-)
-(
-  input                       clk,
-  input                       rstn,
-  input                       en,
-  output  wire                ready,
-  input  [DATAWIDTH-1:0]      dividend,
-  input  [DATAWIDTH-1:0]      divisor,
-  output wire [DATAWIDTH-1:0] quotient,
-  output wire [DATAWIDTH-1:0] remainder,
-  output wire                 vld_out
+    input wire opn_valid,   
+    output reg res_valid,   
+    input wire res_ready,   
+    output wire [15:0] result
 );
 
-parameter IDLE =0;
-parameter SUB  =1;
-parameter SHIFT=2 ;
-parameter DONE =3;
+    reg [7:0] dividend_save, divisor_save;
+    reg [15:0] SR;                  
+    reg [8 :0] NEG_DIVISOR;        
+    wire [7:0] REMAINER, QUOTIENT;
+    assign REMAINER = SR[15:8];
+    assign QUOTIENT = SR[7: 0];
 
-reg [DATAWIDTH*2-1:0] dividend_e ;
-reg [DATAWIDTH*2-1:0] divisor_e  ;
-reg [DATAWIDTH-1:0]   quotient_e ;
-reg [DATAWIDTH-1:0]   remainder_e;
+    wire [7:0] divident_abs;
+    wire [8:0] divisor_abs;
+    wire [7:0] remainer, quotient;
 
+    assign divident_abs = (sign & dividend[7]) ? ~dividend + 1'b1 : dividend;
+    assign remainer = (sign & dividend_save[7]) ? ~REMAINER + 1'b1 : REMAINER;
+    assign quotient = sign & (dividend_save[7] ^ divisor_save[7]) ? ~QUOTIENT + 1'b1 : QUOTIENT;
+    assign result = {remainer,quotient};
 
-reg [1:0] current_state,next_state;
+    wire CO;
+    wire [8:0] sub_result;
+    wire [8:0] mux_result;
 
-reg [DATAWIDTH-1:0] count;
+    assign {CO,sub_result} = {1'b0,REMAINER} + NEG_DIVISOR;
 
+    assign mux_result = CO ? sub_result : {1'b0,REMAINER};
 
-always@(posedge clk or negedge rstn)
-  if(!rstn) current_state <= IDLE;
-  else current_state <= next_state;
+    reg [3:0] cnt;
+    reg start_cnt;
+    always @(posedge clk) begin
+        if(rst) begin
+            SR <= 0;
+            dividend_save <= 0;
+            divisor_save <= 0;
 
-always @(*) begin
-  next_state <= 2'bx;
-  case(current_state)
-    IDLE: if(en) next_state <= SUB;
-          else next_state <= IDLE;
-    SUB:  next_state <= SHIFT;
-    SHIFT:if(count < DATAWIDTH) next_state <= SUB;
-          else next_state <= DONE;
-    DONE: next_state <= IDLE;
-  endcase
-end
-
-always@(posedge clk or negedge rstn) begin
- if(!rstn)begin
-   dividend_e  <= 0;
-   divisor_e   <= 0;
-   quotient_e  <= 0;
-   remainder_e <= 0;
-   count       <= 0;
- end 
- else begin 
-  case(current_state)
-  IDLE:begin
-         dividend_e <= {{DATAWIDTH{1'b0}},dividend};
-         divisor_e  <= {divisor,{DATAWIDTH{1'b0}}};
-       end
-  SUB:begin
-        if(dividend_e>=divisor_e)begin
-           dividend_e <= dividend_e-divisor_e+1'b1;
-         end
-        else begin
-           dividend_e <= dividend_e;
+            cnt <= 0;
+            start_cnt <= 1'b0;
         end
-      end
-  SHIFT:begin
-       if(count<DATAWIDTH)begin
-         dividend_e <= dividend_e<<1;
-         count      <= count+1;      
-       end
-       else begin
-         quotient_e<= dividend_e[DATAWIDTH-1:0];
-         remainder_e <= dividend_e[DATAWIDTH*2-1:DATAWIDTH];
-       end
-     end
-  DONE:begin
-        count       <= 0;
-  end    
-  endcase
- end
-end
+        else if(~start_cnt & opn_valid & ~res_valid) begin
+            cnt <= 1;
+            start_cnt <= 1'b1;
+        
+            dividend_save <= dividend;
+            divisor_save <= divisor;
 
-assign quotient  = quotient_e;
-assign remainder = remainder_e;
+            SR[15:0] <= {7'b0,divident_abs,1'b0}; 
+            NEG_DIVISOR <= (sign & divisor[7]) ? {1'b1,divisor} : ~{1'b0,divisor} + 1'b1; 
+        end
+        else if(start_cnt) begin
+            if(cnt[3]) begin    
+                cnt <= 0;
+                start_cnt <= 1'b0;
+                
+                SR[15:8] <= mux_result[7:0];
+                SR[0] <= CO;
+            end
+            else begin
+                cnt <= cnt + 1;
 
-assign ready=(current_state==IDLE)? 1'b1:1'b0;
-assign vld_out=(current_state==DONE)? 1'b1:1'b0;
+                SR[15:0] <= {mux_result[6:0],SR[7:1],CO,1'b0}; 
+            end
+        end
+    end
 
+    wire data_go;
+    assign data_go = res_valid & res_ready;
+    always @(posedge clk) begin
+        res_valid <= rst     ? 1'b0 :
+                     cnt[3]  ? 1'b1 :
+                     data_go ? 1'b0 : res_valid;
+    end
 endmodule
