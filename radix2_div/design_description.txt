@@ -1,54 +1,39 @@
 Please act as a professional verilog designer.
 
-Implement a simplified radix-2 divider module and the inputs are two 8-bit operands. It has a parameter DATAWIDTH, which is set to 8 by default but can be changed when instantiating the module.
+Implement a simplified radix-2 divider on 8-bit signed or unsigned integers. and the inputs are two 8-bit operands. The module accepts a dividend and a divisor as inputs and provides a 16-bit result containing both the quotient and the remainder. The design supports both signed and unsigned division operations.
 
 Module name:  
     radix2_div 
 
-Parameter:
-DATAWIDTH = 8
-
 Input ports:
     clk: Clock signal used for synchronous operation.
-    rstn: Active-low reset signal. Defined as 0 for reset and 1 for reset signal inactive.
-    en: 1-bit enable signal to initiate the division operation.
-    dividend: DATAWIDTH bit input signal [DATAWIDTH-1:0] representing the dividend for division.
-    divisor: DATAWIDTH bit input signal [DATAWIDTH-1:0] representing the divisor for division.
+    rst: The reset signal to initialize or reset the module.
+    sign: 1-bit indicates if the operation is signed (1) or unsigned (0).
+    dividend: 8-bit input signal representing the dividend for division.
+    divisor: 8-bit input signal representing the divisor for division.
+    opn_valid: 1-bit indicates that a valid operation request is present.
 Output ports:
-    ready: 1-bit output signal indicating the readiness of the module.
-    quotient: DATAWIDTH bit output signal [DATAWIDTH-1:0] representing the division quotient.
-    remainder: DATAWIDTH bit output signal [DATAWIDTH-1:0] representing the division remainder.
-    vld_out: 1-bit output signal indicating the validity of the output data.
+    res_valid: 1-bit output signal indicating the result is valid and ready.
+    result: 16-bit the output containing the remainder in the upper 8 bits and the quotient in the lower 8 bits.
 
 Implementation:
-State Machine:
-IDLE: Initial state, waiting for the enable signal (en) to become active.
-SUB: Subtract state, where the actual subtraction of divisor from dividend takes place.
-SHIFT: Shift state, shifting the dividend left (effectively multiplying by 2) until a certain condition is met.
-DONE: Done state, indicating the completion of the division.
 
-State Transition Logic:
-The next_state logic determines the next state based on the current state and the enable signal.
-State Register:
-current_state: Represents the current state of the FSM.
-next_state: Represents the next state to transition to.
+Operation Start:
+When opn_valid is high and res_valid is low, the module saves the inputs dividend and divisor.
+Initializes the shift register SR with the absolute value of the dividend shifted left by one bit.
+Sets NEG_DIVISOR to the negated absolute value of the divisor.
+Sets the counter cnt to 1 and start_cnt to 1 to begin the division process.
 
-Data Registers:
-dividend_e: Extended version of the dividend to facilitate arithmetic operations.
-divisor_e: Extended version of the divisor.
-quotient_e: Register to store the calculated quotient.
-remainder_e: Register to store the calculated remainder.
-count: Counter for tracking the number of shifts performed.
+Division Process(If start_cnt is high, the module performs the following steps):
+If the counter cnt reaches 8 (most significant bit of cnt is set), the division is complete:
+cnt and start_cnt are cleared.
+Updates the shift register SR with the final remainder and quotient.
+Otherwise, the counter cnt is incremented, and the shift register SR is updated based on the subtraction result:
+Computes the subtraction of NEG_DIVISOR.
+Uses a multiplexer to select the appropriate result based on the carry-out.
+Updates SR by shifting left and inserting the carry-out.
 
-State Transition and Data Computation:
-State transition and data computation are performed in the combinational blocks using always @(*) and case statements.
-
-Output Assignments:
-quotient and remainder are assigned values from their respective registers.
-ready is asserted when the current state is IDLE.
-vld_out is asserted when the current state is DONE.
-
-Reset Logic:
-Resets all data registers and counters to zero on a negative edge of the asynchronous reset signal.
+Result Validity:
+res_valid is managed based on the reset signal, the counter, and whether the result has been consumed.
 
 Give me the complete code.
