@@ -121,7 +121,7 @@ Fig.1: The workflow of adopting RTLLM for completely automated design RTL genera
   
 <img src="_pic/update_Syntax_and_Functionality_Verification.png" width="800px">
 
-Fig.2: The Syntax and Functionality Correctness Verification for Different LLMs
+Fig.2: The Syntax and Functionality Correctness Verification for Different LLMs.
  
 ---
  
@@ -133,6 +133,19 @@ Fig.2: The Syntax and Functionality Correctness Verification for Different LLMs
 
 Fig.3: The Design Qualities of Gate-Level Netlist, Synthesized with Design Compiler.
 
+## RTLLM-2.0
+Shang Liu, Yao Lu, Wenji Fang, Mengming Li, and Zhiyao Xie, "Shang Liu, Yao Lu, Wenji Fang, Mengming Li, and Zhiyao Xie," IEEE/ACM International Conference on Computer Aided Design (ICCAD), 2024.[[paper]](https://zhiyaoxie.com/files/ICCAD24_OpenLLM.pdf)
+
+The benchmark RTLLM-2.0 dataset is meticulously categorized into
+four primary module classes: Arithmetic Modules, Memory Modules,
+Control Modules, and Miscellaneous Modules. Each class encompasses
+a variety of functional units pertinent to diverse computational
+and control tasks, as delineated in **Fig.4**.
+
+<img src="_pic/RTLLM2.png" width="800px">
+
+Fig.4: RTLLM-2.0 benchmark description. The benchmark includes 50 designs across various applications, with bold designs
+representing newly added designs relative to RTLLM.
 
 ## Citation
 If RTLLM could help your project, please cite our work:
