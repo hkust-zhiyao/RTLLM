@@ -7,7 +7,6 @@ wire [15:0] result;
 wire [15:0] odd;
 
 integer i; 
-reg [15:0] expected_result; 
 integer error = 0; 
 reg [15:0] expected_result;
 reg [15:0] expected_odd;

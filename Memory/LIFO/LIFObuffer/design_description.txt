@@ -1,0 +1,29 @@
+Please act as a professional Verilog designer.
+
+A Last-In-First-Out (LIFO) buffer for temporary data storage. This 4-bit wide buffer can hold up to 4 entries, allowing for push and pop operations controlled by read/write (RW) signals.
+
+Module name:
+    LIFObuffer
+
+Input ports:
+    dataIn [3:0]: 4-bit input data to be pushed onto the buffer.
+    RW: Read/Write control signal (1 for read, 0 for write).
+    EN: Enable signal to activate buffer operations.
+    Rst: Active high reset signal to initialize the buffer.
+    Clk: Clock signal for synchronous operations.
+
+Output ports:
+    EMPTY: Flag indicating whether the buffer is empty.
+    FULL: Flag indicating whether the buffer is full.
+    dataOut [3:0]: 4-bit output data retrieved from the buffer.
+
+Implementation:
+    The buffer uses a stack memory array (stack_mem) to store the data. A stack pointer (SP) tracks the current position in the stack.
+    On the rising edge of the clock (Clk), if the enable (EN) signal is high:
+    If the reset (Rst) signal is high, the stack is cleared, the stack pointer is set to 4 (indicating an empty buffer), and all memory locations are initialized to 0.
+    If the reset signal is low, the buffer checks if it is full or empty and processes data accordingly:
+    If RW is low (write operation) and the buffer is not full, data from dataIn is pushed onto the stack, and the stack pointer is decremented.
+    If RW is high (read operation) and the buffer is not empty, data is popped from the stack into dataOut, the corresponding stack memory is cleared, and the stack pointer is incremented.
+    Flags for EMPTY and FULL are updated based on the stack pointer status.
+
+Give me the complete code.

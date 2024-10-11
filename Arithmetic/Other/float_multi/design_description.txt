@@ -1,0 +1,35 @@
+Please act as a professional Verilog designer.
+
+Implement a module of a 32-bit floating-point multiplier for IEEE-754 standard single-precision arithmetic.
+The float_multi module is designed to perform high-precision multiplication of 32-bit single-precision floating-point numbers, following the IEEE 754 standard. This module enables accurate arithmetic operations essential for various computational applications.
+
+Module name:
+float_multi
+
+Input ports:
+    clk (input): Clock signal for synchronization.
+    rst (input): Reset signal (active high).
+    a (input [31:0]): First operand in IEEE 754 format.
+    b (input [31:0]): Second operand in IEEE 754 format.
+
+Output ports:
+    z (output reg [31:0]): Result of the multiplication in IEEE 754 format.
+
+Internal signals:
+    counter (reg [2:0]): Cycle counter for operation sequencing.
+    a_mantissa, b_mantissa, z_mantissa (reg [23:0]): Mantissas of input and output numbers.
+    a_exponent, b_exponent, z_exponent (reg [9:0]): Exponents of input and output numbers.
+    a_sign, b_sign, z_sign (reg): Sign bits for inputs and output.
+    product (reg [49:0]): Intermediate product of the mantissas.
+    guard_bit, round_bit, sticky (reg): Rounding control bits.
+
+Implementation:
+    -Initialization: The counter is reset to zero on the rst signal.
+    -Input Processing: The mantissas, exponents, and sign bits of inputs a and b are extracted during the first clock cycle.
+    -Special Cases Handling: The module identifies special cases like NaN (Not a Number) and infinity based on the inputs.
+    -Normalization: Mantissas are normalized if needed.
+    -Multiplication: The mantissas are multiplied, combining the signs and adjusting the exponents.
+    -Rounding and Adjustment: The module rounds the result and adjusts the exponent to ensure accurate representation.
+    -Output Generation: The final result is formatted in IEEE 754 standard, addressing overflow and underflow scenarios.
+
+Give me the complete code.

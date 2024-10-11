@@ -1,0 +1,29 @@
+Please act as a professional Verilog designer.
+
+Implement a module of a sequence detector to detect a specific 4-bit binary sequence 1001.
+
+Module name:
+    sequence_detector
+
+Input ports:
+    clk: Clock signal to synchronize the detector.
+    reset_n: Reset signal to initialize the state machine.
+    data_in: 1-bit binary input signal to feed the bitstream for sequence detection.
+
+Output ports:
+    sequence_detected: 1-bit output signal that is set high when the specific sequence is detected.
+    
+Internal logic:
+    State Machine: The sequence detector uses a finite state machine (FSM) with the following states:
+    IDLE: Waiting for the start of the sequence.
+    S1: The first bit of the desired sequence is detected.
+    S2: The second bit of the desired sequence is detected.
+    S3: The third bit of the desired sequence is detected.
+    S4: The fourth and final bit of the desired sequence is detected, and the output sequence_detected is set high.
+
+Implementation:
+    -FSM Design: The FSM transitions through states based on the bitstream data_in. On each clock cycle, the detector checks for a match of the specific sequence.
+
+    -Sequence Detection: The module checks the input data_in and transitions between states. Once the complete sequence is detected, sequence_detected is asserted.
+
+    -Reset Behavior: When reset is high, the state machine returns to the IDLE state, resetting the detection process.

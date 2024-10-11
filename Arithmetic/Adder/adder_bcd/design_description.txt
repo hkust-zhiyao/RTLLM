@@ -1,0 +1,22 @@
+Please act as a professional verilog designer.
+
+Implement a module of a 4-bit BCD adder for decimal arithmetic operations. 
+
+Module name:  
+    adder_bcd               
+Input ports:
+    A [3:0]: First BCD input (4-bit, representing a decimal digit from 0 to 9).
+    B [3:0]: Second BCD input (4-bit, representing a decimal digit from 0 to 9).
+    Cin: Carry-in input (1-bit).
+Output ports:
+    Sum [3:0]: 4-bit output representing the sum of the two BCD inputs, corrected to be a valid BCD digit (0–9).
+    Cout: Carry-out output (1-bit), used when the sum exceeds the decimal value of 9.
+
+Implementation:
+Addition: The module performs binary addition of A, B, and Cin.
+BCD Correction: If the sum exceeds 9 (binary 1001), a correction of 6 (binary 0110) is added to the sum. This correction ensures that the result is within the BCD range.
+Carry Generation: If the result of the addition exceeds 9, a carry-out (Cout) is generated, signaling that the BCD sum exceeds a single decimal digit.
+
+Give me the complete code.
+ 
+
