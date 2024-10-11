@@ -1,23 +1,23 @@
 ```
 
-  _____    _______   _        _        __  __        __      __  __       __ 
- |  __ \  |__   __| | |      | |      |  \/  |       \ \    / / /_ |     /_ |
- | |__) |    | |    | |      | |      | \  / |        \ \  / /   | |      | |
- |  _  /     | |    | |      | |      | |\/| |         \ \/ /    | |      | |
- | | \ \     | |    | |____  | |____  | |  | |          \  /     | |  _   | |
- |_|  \_\    |_|    |______| |______| |_|  |_|           \/      |_| (_)  |_|
-                                                                             
-                                                                             
+  _____    _______   _        _        __  __    __      __  ___         ___  
+ |  __ \  |__   __| | |      | |      |  \/  |   \ \    / / |__ \       / _ \ 
+ | |__) |    | |    | |      | |      | \  / |    \ \  / /     ) |     | | | |
+ |  _  /     | |    | |      | |      | |\/| |     \ \/ /     / /      | | | |
+ | | \ \     | |    | |____  | |____  | |  | |      \  /     / /_   _  | |_| |
+ |_|  \_\    |_|    |______| |______| |_|  |_|       \/     |____| (_)  \___/ 
+                                                                              
+                                                                          
                                               
 ```
-**Version 1.1** 
+**Version 2.0** 
 
-We have released RTLLM v1.1 already, which fixes some errors found in **[v1.0](https://github.com/hkust-zhiyao/RTLLM/tree/v1.0)**.
+We have released RTLLM v2.0 already, which fixes some errors found in **[v1.1](https://github.com/hkust-zhiyao/RTLLM/tree/v1.1)** and expand the .
 1. Update the ```design_description.txt ``` to better guide LLM in generating RTL code.
 2. Provide a more comprehensive ```testbench.v``` to improve the accuracy of the test.
 3. Update a more practical testing script ```auto_run.py``` .
 
---13 Dec. 2023
+--11 Oct. 2024
 
 # RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
 
