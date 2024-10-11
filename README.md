@@ -12,12 +12,22 @@
 ```
 **Version 2.0** 
 
-We have released RTLLM v2.0 already, which fixes some errors found in **[v1.1](https://github.com/hkust-zhiyao/RTLLM/tree/v1.1)** and expand the .
+We have released RTLLM v2.0 already, which builds upon **[v1.1](https://github.com/hkust-zhiyao/RTLLM/tree/v1.1)** by expanding the number of designs to **50**. 
+
+Additionally, these designs have been meticulously categorized.
+1. Added a design categorization file: ```File_list.md```.
+3. Fix some bugs.
+
+--11 Oct. 2024
+
+**Version 1.1** 
+
+We have released RTLLM v1.1 already, which fixes some errors found in **[v1.0](https://github.com/hkust-zhiyao/RTLLM/tree/v1.0)**.
 1. Update the ```design_description.txt ``` to better guide LLM in generating RTL code.
 2. Provide a more comprehensive ```testbench.v``` to improve the accuracy of the test.
 3. Update a more practical testing script ```auto_run.py``` .
 
---11 Oct. 2024
+--13 Dec. 2023
 
 # RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
 
@@ -122,3 +132,27 @@ Fig.2: The Syntax and Functionality Correctness Verification for Different LLMs
 <img src="_pic/DC_Results.png" width="800px">
 
 Fig.3: The Design Qualities of Gate-Level Netlist, Synthesized with Design Compiler.
+
+
+## Citation
+If RTLLM could help your project, please cite our work:
+
+```
+@inproceedings{lu2024rtllm,
+  author={Lu, Yao and Liu, Shang and Zhang, Qijun and Xie, Zhiyao},
+  booktitle={2024 29th Asia and South Pacific Design Automation Conference (ASP-DAC)}, 
+  title={RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model}, 
+  year={2024},
+  pages={722-727},
+  organization={IEEE}
+  }
+
+@inproceedings{liu2024openllm,
+  title={OpenLLM-RTL: Open Dataset and Benchmark for LLM-Aided Design RTL Generation(Invited)},
+  author={Liu, Shang and Lu, Yao and Fang, Wenji and Li, Mengming and Xie, Zhiyao},
+  booktitle={Proceedings of 2024 IEEE/ACM International Conference on Computer-Aided Design (ICCAD)},
+  year={2024},
+  organization={ACM}
+}
+
+```
