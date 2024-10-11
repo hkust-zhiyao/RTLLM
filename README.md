@@ -7,10 +7,10 @@
  | | \ \     | |    | |____  | |____  | |  | |      \  /     / /_   _  | |_| |
  |_|  \_\    |_|    |______| |______| |_|  |_|       \/     |____| (_)  \___/ 
                                                                               
-                                                                          
-                                              
+                                                                                                                       
 ```
-**Version 2.0** 
+***
+***Version 2.0***
 
 We have released RTLLM v2.0 already, which builds upon **[v1.1](https://github.com/hkust-zhiyao/RTLLM/tree/v1.1)** by expanding the number of designs to **50**. 
 
@@ -19,8 +19,8 @@ Additionally, these designs have been meticulously categorized.
 3. Fix some bugs.
 
 --11 Oct. 2024
-
-**Version 1.1** 
+***
+***Version 1.1***
 
 We have released RTLLM v1.1 already, which fixes some errors found in **[v1.0](https://github.com/hkust-zhiyao/RTLLM/tree/v1.0)**.
 1. Update the ```design_description.txt ``` to better guide LLM in generating RTL code.
@@ -28,7 +28,7 @@ We have released RTLLM v1.1 already, which fixes some errors found in **[v1.0](h
 3. Update a more practical testing script ```auto_run.py``` .
 
 --13 Dec. 2023
-
+***
 # RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model
 
 
