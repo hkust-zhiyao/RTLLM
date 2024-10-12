@@ -134,7 +134,7 @@ Fig.2: The Syntax and Functionality Correctness Verification for Different LLMs.
 Fig.3: The Design Qualities of Gate-Level Netlist, Synthesized with Design Compiler.
 
 ## RTLLM-2.0
-Shang Liu, Yao Lu, Wenji Fang, Mengming Li, and Zhiyao Xie, "Shang Liu, Yao Lu, Wenji Fang, Mengming Li, and Zhiyao Xie," IEEE/ACM International Conference on Computer Aided Design (ICCAD), 2024.[[paper]](https://zhiyaoxie.com/files/ICCAD24_OpenLLM.pdf)
+Shang Liu, Yao Lu, Wenji Fang, Mengming Li, and Zhiyao Xie, "OpenLLM-RTL: Open Dataset and Benchmark for LLM-Aided Design RTL Generation(Invited)", IEEE/ACM International Conference on Computer Aided Design (ICCAD), 2024.[[paper]](https://zhiyaoxie.com/files/ICCAD24_OpenLLM.pdf)
 
 The benchmark RTLLM-2.0 dataset is meticulously categorized into
 four primary module classes: Arithmetic Modules, Memory Modules,
