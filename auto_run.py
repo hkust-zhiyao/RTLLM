@@ -45,9 +45,11 @@ def cal_atk(dic_list, n, k):
 
 
 progress_bar = tqdm.tqdm(total=290)
-design_name = ['accu', 'adder_8bit', 'adder_16bit', 'adder_32bit', 'adder_pipe_64bit', 'asyn_fifo', 'calendar', 'counter_12', 'edge_detect',
-               'freq_div', 'fsm', 'JC_counter', 'multi_16bit', 'multi_booth_8bit', 'multi_pipe_4bit', 'multi_pipe_8bit', 'parallel2serial' , 'pe' , 'pulse_detect', 
-               'radix2_div', 'RAM', 'right_shifter',  'serial2parallel', 'signal_generator','synchronizer', 'alu', 'div_16bit', 'traffic_light', 'width_8to16']
+design_name = ['adder_8bit', 'adder_16bit', 'adder_32bit', 'adder_pipe_64bit', 'adder_bcd', 'sub_64bit', 'multi_8bit', 'multi_16bit', 'multi_booth_8bit', 'multi_pipe_4bit', 
+               'multi_pipe_8bit', 'div_16bit', 'radix2_div', 'comparator_3bit', 'comparator_4bit', 'accu', 'fixed_point_adder', 'fixed_point_substractor', 'float_multi', 'asyn_fifo', 
+               'LIFObuffer', 'right_shifter', 'LFSR', 'barrel_shifter', 'fsm', 'sequence_detector', 'counter_12', 'JC_counter', 'ring_counter', 'up_down_counter', 
+               'signal_generator', 'square_wave', 'clkgenerator', 'instr_reg', 'ROM', 'RAM', 'alu', 'pe', 'freq_div', 'freq_divbyeven', 
+               'freq_divbyodd', 'freq_divfrac', 'calendar', 'traffic_light', 'width_8to16', 'synchronizer', 'edge_detect', 'pulse_detect', 'parallel2serial', 'serial2parallel']
 
 
 path = "/home/coguest/luyao/SmallDesigns/chatgpt35/"
