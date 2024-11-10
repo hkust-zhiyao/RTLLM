@@ -7,7 +7,7 @@ Module name:
 
 Input ports:
     clk: Clock signal to synchronize the detector.
-    reset_n: Reset signal to initialize the state machine.
+    rst_n: Reset signal to initialize the state machine.
     data_in: 1-bit binary input signal to feed the bitstream for sequence detection.
 
 Output ports:
