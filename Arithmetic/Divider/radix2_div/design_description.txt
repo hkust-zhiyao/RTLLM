@@ -12,6 +12,7 @@ Input ports:
     dividend: 8-bit input signal representing the dividend for division.
     divisor: 8-bit input signal representing the divisor for division.
     opn_valid: 1-bit indicates that a valid operation request is present.
+    res_ready: 1-bit indicates the downstream consumer is ready to accept the result; the result is consumed when res_valid and res_ready are both high.
 Output ports:
     res_valid: 1-bit output signal indicating the result is valid and ready.
     result: 16-bit the output containing the remainder in the upper 8 bits and the quotient in the lower 8 bits.
@@ -34,6 +35,6 @@ Uses a multiplexer to select the appropriate result based on the carry-out.
 Updates SR by shifting left and inserting the carry-out.
 
 Result Validity:
-res_valid is managed based on the reset signal, the counter, and whether the result has been consumed.
+res_valid is managed based on the reset signal, the counter, and whether the result has been consumed; a result is consumed when res_valid and res_ready are both high, which clears res_valid.
 
 Give me the complete code.

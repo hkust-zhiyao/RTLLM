@@ -2,8 +2,11 @@ Please act as a professional verilog designer.
 
 Implement a module of a 64-bit ripple carry adder, which includes several registers to enable the pipeline stages. The output result is available on the result port, and the o_en = 1 indicates the availability of the result.
 
-Module name:  
-    adder_pipe_64bit               
+Module name:
+    adder_pipe_64bit
+Parameters:
+    DATA_WIDTH: Width of the input operands, default 64.
+    STG_WIDTH: Number of bits added per pipeline stage, default 16.
 Input ports:
     clk: Clock input
     rst_n: Active low reset signal
